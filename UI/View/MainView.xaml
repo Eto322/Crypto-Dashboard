@@ -6,6 +6,8 @@
         xmlns:local="clr-namespace:UI.View"
         mc:Ignorable="d"
         Title="MainView" Height="450" Width="800">
+    
+    
     <Grid>
         
     </Grid>
