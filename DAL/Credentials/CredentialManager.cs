@@ -26,6 +26,8 @@ namespace DAL.Credentials
 
             // Retrieve the CoinGecko API key from the configuration settings
             _geckoApiKey = configuration["ApiSettings:CoinGeckoApiKey"];
+
+            // Retrieve the CoinCap API key from the configuration settings
             _coincapApiKey = configuration["ApiSettings:CoinCapApiKey"];
         }
 
