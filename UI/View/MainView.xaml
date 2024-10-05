@@ -7,10 +7,36 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Style="{StaticResource MaterialDesignWindow}"
         mc:Ignorable="d"
-        Title="MainView" Height="450" Width="800">
+        Title="MainView" Height="600" Width="900">
     
     
     <Grid>
-        <GroupBox></GroupBox>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="0.1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TabControl SelectedIndex="{Binding }"
+                    materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
+                    SnapsToDevicePixels="True"
+                    Style="{StaticResource MaterialDesignNavigationRailTabControl}"
+                    TabStripPlacement="Left">
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel
+                    Width="auto"
+                    Height="auto">
+                    <materialDesign:PackIcon
+                        Width="24"
+                        Height="24"
+                        HorizontalAlignment="Center"
+                        Kind="Bitcoin" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        Text="Top Coins" />
+                </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
