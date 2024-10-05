@@ -6,9 +6,16 @@
              StartupUri="../View/MainView.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            <!-- Dark Theme primary Metallic gold , secondary HTML Silver -->
+            <Color x:Key="PrimaryColorDark">#D4AF37</Color>
+            <Color x:Key="SecondaryColorDark">#C0C0C0</Color>
+
+            <!-- Light Theme primary Lemon Chiffon, secondary Gainsboro -->
+            <Color x:Key="PrimaryColorLight">#FFFACD</Color>
+            <Color x:Key="SecondaryColorLight">#E0E0E0</Color>
+
             <ResourceDictionary.MergedDictionaries>
-                <!-- primary Metallic gold , secondary HTML Silver -->
-                <materialDesign:CustomColorTheme BaseTheme="Inherit" PrimaryColor="#D4AF37" SecondaryColor="#C0C0C0	" />
+                <materialDesign:CustomColorTheme BaseTheme="Dark" PrimaryColor="#D4AF37" SecondaryColor="#C0C0C0" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

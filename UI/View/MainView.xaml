@@ -5,18 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI.View"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:viewModel="clr-namespace:UI.ViewModel"
         Style="{StaticResource MaterialDesignWindow}"
         mc:Ignorable="d"
         Title="MainView" Height="600" Width="900">
-    
-    
+
+     <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
-        <TabControl SelectedIndex="{Binding }"
+        <TabControl 
                     materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
                     SnapsToDevicePixels="True"
                     Style="{StaticResource MaterialDesignNavigationRailTabControl}"
@@ -50,29 +54,29 @@
                         <TextBox Grid.Column="0" 
                                  Height="30" 
                                  VerticalAlignment="Center" 
-                                 Text="{Binding }" />
+                                 Text="" />
 
                         <Button Grid.Column="1" 
                                 Content="Search" 
-                                Command="{Binding}" 
                                 Height="30" 
                                 Margin="10,0,0,0" />
+
                     </Grid>
 
-                    <DataGrid ItemsSource="{Binding }" 
+                    <DataGrid  
                               AutoGenerateColumns="False" 
                               Margin="0"
                               CanUserResizeColumns="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding}"/>
-                            <DataGridTextColumn Header="Symbol" Binding="{Binding }"/>
-                            <DataGridTextColumn Header="Name" Binding="{Binding }" />
-                            <DataGridTextColumn Header="Current Price" Binding="{Binding }"/>
-                            <DataGridTextColumn Header="Market Cap" Binding="{Binding }"/>
-                            <DataGridTextColumn Header="24h Volume" Binding="{Binding }"/>
-                            <DataGridTextColumn Header="Change (24h)" Binding="{Binding }" />
-                            <DataGridTextColumn Header="Circulating Supply" Binding="{Binding }"/>
-                            <DataGridTextColumn Header="Last Updated" Binding="{Binding }" />
+                            <DataGridTextColumn Header="ID"/>
+                            <DataGridTextColumn Header="Symbol"/>
+                            <DataGridTextColumn Header="Name" />
+                            <DataGridTextColumn Header="Current Price"/>
+                            <DataGridTextColumn Header="Market Cap"/>
+                            <DataGridTextColumn Header="24h Volume"/>
+                            <DataGridTextColumn Header="Change (24h)"/>
+                            <DataGridTextColumn Header="Circulating Supply"/>
+                            <DataGridTextColumn Header="Last Updated"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
@@ -115,38 +119,33 @@
                 </TabItem.Header>
 
                 <StackPanel Margin="10,0,0,0">
-                    <!-- Toggle Dark/Light Theme Mode=TwoWay-->
+                    <!-- Toggle Dark/Light Theme -->
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                         <TextBlock Text="Light Theme:" VerticalAlignment="Center" Margin="0,0,10,0"/>
 
                         <ToggleButton
                             Content="{materialDesign:PackIcon Kind=SunMoonStars,Size=32}"
-                            IsChecked="{Binding}"
+                            IsChecked="{Binding IsDarkTheme, Mode=TwoWay}"
                             Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
-                            ToolTip="Toggle Dark/Light Theme"
-                        />
+                            ToolTip="Toggle Dark/Light Theme"/>
                     </StackPanel>
 
-                    <!-- Language Changer  Mode=TwoWay-->
+                    <!-- Language Changer  -->
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                         <TextBlock Text="Language:" VerticalAlignment="Center" />
                         <ComboBox Width="150" 
-                                  SelectedItem="{Binding }" 
-                                  ItemsSource="{Binding }"
                                   Margin="10,0,0,0"/>
                     </StackPanel>
 
-                    <!-- Top N Currency Mode=TwoWay -->
+                    <!-- Top N Currency -->
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                         <TextBlock Text="Top Currencies Count:" VerticalAlignment="Center" />
                         <ComboBox Width="150" 
-                                  SelectedItem="{Binding }" 
-                                  ItemsSource="{Binding }"
                                   Margin="10,0,0,0"/>
                     </StackPanel>
 
                     <!-- Save Changes Button -->
-                    <Button Content="Save Settings" Command="{Binding SaveSettingsCommand}" Margin="200,25,200,0"/>
+                    <Button Content="Save Settings" Margin="200,25,200,0"/>
                 </StackPanel>
 
 
