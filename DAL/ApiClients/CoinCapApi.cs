@@ -11,10 +11,7 @@ using System.Net.Http.Headers;
 
 namespace DAL.ApiClients
 {
-    public class CoinCapResponce
-    {
-        public List<Cryptocurrency> Data { get; set; }
-    }
+  
 
     public class CoinCapApi
     {

@@ -11,10 +11,7 @@ using System.Net.Http.Headers;
 
 namespace DAL.ApiClients
 {
-    public class CoinGeckoResponse
-    {
-        public List<Cryptocurrency> Data { get; set; }
-    }
+  
 
     public class CoinGeckoApi
     {
@@ -28,9 +25,9 @@ namespace DAL.ApiClients
             _client.DefaultRequestHeaders.Add("x-cg-demo-api-key", _apikey);
         }
 
-        public string GetTopNCryptos(int limit, string vsCurrency = "usd")
+        public string GetTopNCryptos(int limit, string vsCurrency = "usd", int pageNumber = 1)
         {
-            string url = $"https://api.coingecko.com/api/v3/coins/markets?vs_currency={vsCurrency}&order=market_cap_desc&per_page={limit}&page=1&sparkline=false";
+            string url = $"https://api.coingecko.com/api/v3/coins/markets?vs_currency={vsCurrency}&order=market_cap_desc&per_page={limit}&page={pageNumber}&sparkline=false";
 
             try
             {
@@ -40,7 +37,7 @@ namespace DAL.ApiClients
                 string responseBody = response.Content.ReadAsStringAsync().Result;
                 JArray jsonArray = JArray.Parse(responseBody);
 
-                
+
                 var cryptocurrencies = jsonArray.ToObject<List<Cryptocurrency>>();
 
                 return responseBody;
