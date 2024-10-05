@@ -7,13 +7,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAL.Deserializer.Helper;
 
 namespace DAL.Deserializer
 {
+    
     public class CryptocurrencyDeserializer
     {
+        private DeserializerHelper _helper;
         public List<Cryptocurrency> Deserialize(string json, bool isCoinCap)
         {
+            _helper=new DeserializerHelper();
             if (isCoinCap)
             {
                 
@@ -35,18 +39,19 @@ namespace DAL.Deserializer
             {
                 cryptocurrencies.Add(new Cryptocurrency
                 {
-                    IdCap = item["id"].ToString(),
-                    Symbol = item["symbol"].ToString().ToUpper(),
-                    Name = item["name"].ToString(),
-                    CirculatingSupply = decimal.TryParse(item["supply"]?.ToString(), out var supply) ? supply : (decimal?)null,
-                    MaxSupply = decimal.TryParse(item["maxSupply"]?.ToString(), out var maxSupply) ? maxSupply : (decimal?)null,
-                    MarketCapUsd = decimal.TryParse(item["marketCapUsd"]?.ToString(), out var marketCap) ? marketCap : (decimal?)null,
-                    VolumeUsd24Hr = decimal.TryParse(item["volumeUsd24Hr"]?.ToString(), out var volume) ? volume : (decimal?)null,
-                    CurrentPrice = decimal.TryParse(item["priceUsd"]?.ToString(), out var price) ? price : (decimal?)null,
-                    ChangePercent24Hr = decimal.TryParse(item["changePercent24Hr"]?.ToString(), out var change) ? change : (decimal?)null,
-                    Explorer = item["explorer"]?.ToString()
+                    IdCap = _helper.GetStringValue(item, "id"),
+                    Symbol = _helper.GetStringValue(item, "symbol").ToUpper(),
+                    Name = _helper.GetStringValue(item, "name"),
+                    CirculatingSupply = _helper.GetDecimalValue(item, "supply"),
+                    MaxSupply = _helper.GetDecimalValue(item, "maxSupply"),
+                    MarketCapUsd = _helper.GetDecimalValue(item, "marketCapUsd"),
+                    VolumeUsd24Hr = _helper.GetDecimalValue(item, "volumeUsd24Hr"),
+                    CurrentPrice = _helper.GetDecimalValue(item, "priceUsd"),
+                    ChangePercent24Hr = _helper.GetDecimalValue(item, "changePercent24Hr"),
+                    Explorer = _helper.GetStringValue(item, "explorer")
                 });
             }
+            
 
             return cryptocurrencies;
         }
