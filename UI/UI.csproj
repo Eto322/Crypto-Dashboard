@@ -10,8 +10,8 @@
 
   <ItemGroup>
     <Folder Include="Inf\" />
+    <Folder Include="Model\" />
     <Folder Include="Module\" />
-    <Folder Include="ViewModel\" />
   </ItemGroup>
 
   <ItemGroup>

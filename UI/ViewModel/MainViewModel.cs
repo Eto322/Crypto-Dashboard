@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UI.Model
+namespace UI.ViewModel
 {
-    class MainViewModel
+    internal class MainViewModel
     {
     }
 }
