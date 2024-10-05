@@ -9,17 +9,18 @@ namespace DAL.Model
     public class Cryptocurrency
     {
         // Basic properties of the cryptocurrency
-        public string Id { get; set; }
+        public string IdCap { get; set; } //CoinCap
+        public string IdGecko { get; set; }//CoinGecko
         public string Symbol { get; set; }
         public string Name { get; set; }
-        public decimal? CurrentPrice { get; set; } // CoinGecko only
+        public decimal? CurrentPrice { get; set; } // CoinGecko 
         public decimal? MarketCap { get; set; }
         public decimal? MarketCapUsd { get; set; } // CoinCap
         public decimal? TotalVolume { get; set; } // CoinGecko
         public decimal? VolumeUsd24Hr { get; set; } //  CoinCap
         public decimal? ChangePercent24Hr { get; set; } // CoinCap
         public decimal? PriceChange24h { get; set; } // CoinGecko
-        public decimal? PriceChangePercentage24h { get; set; } // ДCoinGecko
+        public decimal? PriceChangePercentage24h { get; set; } // CoinGecko
         public decimal? CirculatingSupply { get; set; }
         public decimal? TotalSupply { get; set; }
         public decimal? MaxSupply { get; set; }
