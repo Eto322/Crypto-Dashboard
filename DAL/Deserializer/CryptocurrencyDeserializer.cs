@@ -26,8 +26,9 @@ namespace DAL.Deserializer
             }
             else
             {
-                var data = JsonConvert.DeserializeObject<List<Cryptocurrency>>(json);
-                return ConvertCoinGeckoToCryptocurrency(data);
+
+                var jsonData = JArray.Parse(json);
+                return ConvertCoinGeckoToCryptocurrency(jsonData);
             }
         }
 
@@ -38,7 +39,7 @@ namespace DAL.Deserializer
             foreach (var item in data)
             {
                 cryptocurrencies.Add(new Cryptocurrency
-                {
+                { 
                     IdCap = _helper.GetStringValue(item, "id"),
                     Symbol = _helper.GetStringValue(item, "symbol").ToUpper(),
                     Name = _helper.GetStringValue(item, "name"),
@@ -48,17 +49,41 @@ namespace DAL.Deserializer
                     VolumeUsd24Hr = _helper.GetDecimalValue(item, "volumeUsd24Hr"),
                     CurrentPrice = _helper.GetDecimalValue(item, "priceUsd"),
                     ChangePercent24Hr = _helper.GetDecimalValue(item, "changePercent24Hr"),
-                    Explorer = _helper.GetStringValue(item, "explorer")
+                    Explorer = _helper.GetStringValue(item, "explorer"),
+                    MarketCapRank =  _helper.GetDecimalValue(item,"rank")
+
                 });
             }
             
-
             return cryptocurrencies;
         }
 
-        private List<Cryptocurrency> ConvertCoinGeckoToCryptocurrency(List<Cryptocurrency> data)
+        private List<Cryptocurrency> ConvertCoinGeckoToCryptocurrency(JToken data)
         {
-            throw new NotImplementedException();
+            var cryptocurrencies = new List<Cryptocurrency>();
+
+            foreach (var item in data)
+            {
+                cryptocurrencies.Add(new Cryptocurrency
+                {
+                    IdGecko = _helper.GetStringValue(item, "id"),
+                    Symbol = _helper.GetStringValue(item, "symbol").ToUpper(),
+                    Name = _helper.GetStringValue(item, "name"),
+                    CirculatingSupply = _helper.GetDecimalValue(item, "circulating_supply"),
+                    TotalSupply = _helper.GetDecimalValue(item, "total_supply"),
+                    MaxSupply = _helper.GetDecimalValue(item, "max_supply"),
+                    MarketCap = _helper.GetDecimalValue(item, "market_cap"),
+                    TotalVolume = _helper.GetDecimalValue(item, "total_volume"),
+                    CurrentPrice = _helper.GetDecimalValue(item, "current_price"),
+                    PriceChange24h = _helper.GetDecimalValue(item, "price_change_24h"),
+                    PriceChangePercentage24h = _helper.GetDecimalValue(item, "price_change_percentage_24h"),
+                    MarketCapRank = _helper.GetDecimalValue(item, "market_cap_rank"),
+                    Image = _helper.GetStringValue(item, "image"),
+                    LastUpdated = _helper.GetStringValue(item, "last_updated")
+                });
+            }
+
+            return cryptocurrencies;
         }
     }
 }

@@ -24,7 +24,7 @@ namespace DAL.Model
         public decimal? CirculatingSupply { get; set; }
         public decimal? TotalSupply { get; set; }
         public decimal? MaxSupply { get; set; }
-        public int? MarketCapRank { get; set; }
+        public decimal? MarketCapRank { get; set; }
         public string Image { get; set; } //  CoinGecko
         public string Explorer { get; set; } //  CoinCap
         public string LastUpdated { get; set; } //  CoinGecko
