@@ -45,10 +45,29 @@ namespace BLL.Manager
             return topCryptos;
         }
 
+        public List<Cryptocurrency> GetSearchCryptocurrencies(string query)
+        {
+            if (!_credentialManager._isCoinCapApiExist && !_credentialManager._isCoinGeckoApiKeyExist)
+            {
+                Console.WriteLine("No API keys are available.");
+                return new List<Cryptocurrency>();
+            }
+
+            List<Cryptocurrency> geckoData = FetchSearchFromGecko(query);
+            List<Cryptocurrency> capData = FetchSearchFromCap(query);
+
+            var searched = new CryptocurrencyMerger().MergeCryptocurrencyData(capData, geckoData);
+
+            return searched;
+        }
+
+        #region Helpers
+
+        
         private List<Cryptocurrency> FetchTopFromGecko(int n)
         {
             var geckoData = _coinGeckoAPi.GetTopCryptos(n);
-            var geckoCryptocurrencies = _cryptocurrencyDeserializer.Deserialize(geckoData,false);
+            var geckoCryptocurrencies = _cryptocurrencyDeserializer.Deserialize(geckoData, false);
             return geckoCryptocurrencies;
         }
 
@@ -58,5 +77,24 @@ namespace BLL.Manager
             var capCryptocurrencies = _cryptocurrencyDeserializer.Deserialize(capData, true);
             return capCryptocurrencies;
         }
+
+        private List<Cryptocurrency> FetchSearchFromGecko(string query)
+        {
+            var geckoData = _coinGeckoAPi.SearchCoins(query);
+            var geckoCryptocurrencies = _cryptocurrencyDeserializer.Deserialize(geckoData, false);
+            return geckoCryptocurrencies;
+        }
+
+        private List<Cryptocurrency> FetchSearchFromCap(string query)
+        {
+            var capData = _coinCapAPi.SearchCoinCap(query);
+            var capCryptocurrencies = _cryptocurrencyDeserializer.Deserialize(capData, true);
+            return capCryptocurrencies;
+        }
+            
+        
+
+        #endregion
+
     }
 }

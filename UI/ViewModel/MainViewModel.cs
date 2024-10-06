@@ -133,6 +133,7 @@ namespace UI.ViewModel
 
         #region SearchHelpers
 
+        
         public ObservableCollection<CryptoCurrencyModel> TopCoinsSearch()
         {
             if (string.IsNullOrEmpty(TopCoinsSearchBar))
@@ -141,8 +142,7 @@ namespace UI.ViewModel
                 return TopCoinsSearchByTop();
             }
 
-            throw new NotImplementedException();
-            return null;
+            return SearchCoin();
 
         }
 
@@ -150,6 +150,12 @@ namespace UI.ViewModel
         {
             return new ObservableCollection<CryptoCurrencyModel>(
                 convertor.BlltoUIConvertor(cryptoInfoManager.GetTopNCryptos(SelectedNumberOfTopCurrencies)));
+        }
+
+        public ObservableCollection<CryptoCurrencyModel> SearchCoin()
+        {
+            return new ObservableCollection<CryptoCurrencyModel>(
+                convertor.BlltoUIConvertor(cryptoInfoManager.GetSearchCryptocurrencies(TopCoinsSearchBar)));
         }
 
         #endregion
