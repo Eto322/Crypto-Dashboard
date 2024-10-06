@@ -8,9 +8,9 @@
         xmlns:viewModel="clr-namespace:UI.ViewModel"
         Style="{StaticResource MaterialDesignWindow}"
         mc:Ignorable="d"
-        Title="MainView" Height="600" Width="900">
+        Title="MainView" Height="600" Width="1000">
 
-     <Window.DataContext>
+    <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
 
@@ -18,7 +18,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            
+
         </Grid.RowDefinitions>
         <TabControl 
                     materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
@@ -41,9 +41,9 @@
                     </StackPanel>
                 </TabItem.Header>
 
-               
+
                 <StackPanel Orientation="Vertical">
-                   
+
                     <Grid HorizontalAlignment="Stretch" Margin="10">
 
                         <Grid.ColumnDefinitions>
@@ -83,10 +83,10 @@
                     </DataGrid>
                 </StackPanel>
 
-                
+
 
             </TabItem>
-            
+
             <TabItem>
                 <TabItem.Header>
                     <StackPanel
@@ -102,6 +102,44 @@
                             Text="Coin Info" />
                     </StackPanel>
                 </TabItem.Header>
+
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    
+                    <StackPanel Orientation="Horizontal" Grid.Row="0">
+                        <Image
+                            Source="{Binding Image}"
+                            Width="100"
+                            Height="100"
+                            Margin="10"
+                            Stretch="Uniform" />
+
+                        
+                        <StackPanel Margin="10">
+                            <TextBlock Text="aaaaaaaaa" FontWeight="Bold" FontSize="25"/>
+                            <TextBlock Text="aaaaaaaaaaa" FontStyle="Italic" FontSize="20"/>
+                            <TextBlock Text="aaaaaaaaaaa"/>
+                            <TextBlock Text="aaaaaaaaa"/>
+                            <TextBlock Text="aaaaaaaaaa"/>
+                            <TextBlock Text="aaaaaaaaaaaa"/>
+                            <TextBlock Text="aaaaaaaa"/>
+                            
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!--Graph Place -->
+                    <Border Grid.Row="1" Margin="10" BorderThickness="1" BorderBrush="Gray">
+                        <TextBlock Text="Candlestick Chart Placeholder" 
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center" 
+                                   FontSize="18"/>
+                        
+                    </Border>
+                </Grid>
             </TabItem>
 
             <TabItem>
