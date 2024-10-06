@@ -1,5 +1,4 @@
-﻿using DAL.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -25,7 +24,7 @@ namespace DAL.ApiClients
             _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {_apikey}");
         }
 
-        public string GetTopNCryptos(int limit)
+        public string GetTopCryptos(int limit)
         {
             string url = $"https://api.coincap.io/v2/assets?limit={limit}";
 
@@ -36,7 +35,6 @@ namespace DAL.ApiClients
                 response.EnsureSuccessStatusCode();
 
                 string responseBody = response.Content.ReadAsStringAsync().Result;
-                JObject json = JObject.Parse(responseBody);
 
                 return responseBody;
             }

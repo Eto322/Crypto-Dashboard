@@ -1,5 +1,4 @@
-﻿using DAL.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -25,7 +24,7 @@ namespace DAL.ApiClients
             _client.DefaultRequestHeaders.Add("x-cg-demo-api-key", _apikey);
         }
 
-        public string GetTopNCryptos(int limit, string vsCurrency = "usd", int pageNumber = 1)
+        public string GetTopCryptos(int limit, string vsCurrency = "usd", int pageNumber = 1)
         {
             string url = $"https://api.coingecko.com/api/v3/coins/markets?vs_currency={vsCurrency}&order=market_cap_desc&per_page={limit}&page={pageNumber}&sparkline=false";
 
@@ -36,9 +35,6 @@ namespace DAL.ApiClients
 
                 string responseBody = response.Content.ReadAsStringAsync().Result;
                 JArray jsonArray = JArray.Parse(responseBody);
-
-
-                var cryptocurrencies = jsonArray.ToObject<List<Cryptocurrency>>();
 
                 return responseBody;
             }

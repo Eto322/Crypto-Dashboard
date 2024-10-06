@@ -1,15 +1,14 @@
-﻿using DAL.ApiClients;
-using DAL.Model;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL.Deserializer.Helper;
+using BLL.Deserializer.Helper;
+using BLL.Model;
 
-namespace DAL.Deserializer
+namespace BLL.Deserializer
 {
     
     public class CryptocurrencyDeserializer
