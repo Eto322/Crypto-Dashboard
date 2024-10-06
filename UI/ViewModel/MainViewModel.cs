@@ -1,6 +1,7 @@
 ﻿using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -8,12 +9,38 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using BLL.Manager;
+using DAL.Credentials;
 using UI.Inf;
+using UI.Model;
 
 namespace UI.ViewModel
 {
     public class MainViewModel:NotifyPropertyChanged
     {
+
+        #region TopCoinsRegion
+
+        private ObservableCollection<CryptoCurrencyModel> _topCurrencies;
+
+        public ObservableCollection<CryptoCurrencyModel> TopCurrencies
+        {
+            get => _topCurrencies;
+            set
+            {
+                _topCurrencies = value;
+                NotifyOfPropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region TopCoinsCommandRegion
+
+
+
+        #endregion
+
         #region SettingsRegion
 
         private bool _isDarkTheme;
@@ -30,6 +57,22 @@ namespace UI.ViewModel
                 }
             }
         }
+
+        private int _selectedNumberOfTopCurrencies;
+        public int SelectedNumberOfTopCurrencies
+        {
+            get => _selectedNumberOfTopCurrencies;
+            set
+            {
+                if (_selectedNumberOfTopCurrencies != value)
+                {
+                    _selectedNumberOfTopCurrencies = value;
+                    NotifyOfPropertyChanged();
+                }
+            }
+        }
+
+        public List<int> TopCurrenciesOptions { get; } = new List<int> { 1,10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
 
 
         #endregion
@@ -57,6 +100,9 @@ namespace UI.ViewModel
 
         #region Helpers
 
+        private CryptoInfoManager cryptoInfoManager;
+        private ModelConvertor convertor;
+
         private readonly PaletteHelper _paletteHelper = new PaletteHelper();
         private void ChangeTheme()
         {
@@ -83,6 +129,12 @@ namespace UI.ViewModel
         public MainViewModel()
         {
             IsDarkTheme= true;
+            SelectedNumberOfTopCurrencies = TopCurrenciesOptions[1];
+            cryptoInfoManager = new CryptoInfoManager(new CredentialManager());
+            convertor= new ModelConvertor();
+            
+            TopCurrencies = new ObservableCollection<CryptoCurrencyModel>(
+                convertor.BlltoUIConvertor(cryptoInfoManager.GetTopNCryptos(SelectedNumberOfTopCurrencies)));
         }
     }
 }
