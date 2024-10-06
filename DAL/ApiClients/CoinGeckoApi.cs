@@ -27,8 +27,8 @@ namespace DAL.ApiClients
         public string SearchCoins(string query)
         {
             string url = $"https://api.coingecko.com/api/v3/search?query={query}";
-
-            return GetResponse(url);
+            List<string> ids = ExtractId(GetResponse(url));
+            return GetCryptoDetailsById(ids);
         }
 
         public string GetTopCryptos(int limit, string vsCurrency = "usd", int pageNumber = 1)
@@ -38,6 +38,42 @@ namespace DAL.ApiClients
             return GetResponse(url);
         }
 
+
+        public string GetCryptoDetailsById(List<string>ids, string vsCurrency = "usd")
+        {
+            string idsString = string.Join(",", ids);
+            string url = $"https://api.coingecko.com/api/v3/coins/markets?vs_currency={vsCurrency}&ids={idsString}&order=market_cap_desc&per_page=250&page=1&sparkline=false";
+            
+            return GetResponse(url);
+        }
+
+        private List<string> ExtractId(string response)
+        {
+            var ids = new List<string>();
+
+            try
+            {
+                JObject jsonResponse = JObject.Parse(response);
+                JArray coinsArray = (JArray)jsonResponse["coins"];
+
+                foreach (var coin in coinsArray)
+                {
+                    string id = coin["id"].ToString();
+                    ids.Add(id);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error parsing response: {e.Message}");
+                return new List<string>();
+               
+            }
+
+            return ids;
+        }
+        
+     
+        
         private string GetResponse (string url)
         {
             try
@@ -46,8 +82,6 @@ namespace DAL.ApiClients
                 response.EnsureSuccessStatusCode();
 
                 string responseBody = response.Content.ReadAsStringAsync().Result;
-                JArray jsonArray = JArray.Parse(responseBody);
-
                 return responseBody;
             }
             catch (HttpRequestException e)
