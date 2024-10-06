@@ -13,8 +13,8 @@
         public decimal? TotalVolume { get; set; } // CoinGecko
         public decimal? VolumeUsd24Hr { get; set; } //  CoinCap
         public decimal? ChangePercent24Hr { get; set; } // CoinCap
-        public decimal? PriceChange24h { get; set; } // CoinGecko
-        public decimal? PriceChangePercentage24h { get; set; } // CoinGecko
+        public decimal? PriceChange24H { get; set; } // CoinGecko
+        public decimal? PriceChangePercentage24H { get; set; } // CoinGecko
         public decimal? CirculatingSupply { get; set; }
         public decimal? TotalSupply { get; set; }
         public decimal? MaxSupply { get; set; }

@@ -3,48 +3,85 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BLL.Manager;
+using BLL.Manager.Helper;
 using UI.Model;
 using BLL.Model;
+using DAL.Credentials;
 
 namespace UI.Inf
 {
     public class ModelConvertor
     {
-        public CryptoCurrencyModel BlltoUICovnertor(Cryptocurrency _cryptoCurrencyBll)
+        public CryptoCurrencyModel BlltoUiCovnertor(Cryptocurrency cryptoCurrencyBll)
         {
             return new CryptoCurrencyModel
             {
-                IdCap = _cryptoCurrencyBll.IdCap,
-                IdGecko = _cryptoCurrencyBll.IdGecko,
-                Symbol = _cryptoCurrencyBll.Symbol,
-                Name = _cryptoCurrencyBll.Name,
-                CurrentPrice = _cryptoCurrencyBll.CurrentPrice,
-                MarketCap = _cryptoCurrencyBll.MarketCap,
-                MarketCapUsd = _cryptoCurrencyBll.MarketCapUsd,
-                TotalVolume = _cryptoCurrencyBll.TotalVolume,
-                VolumeUsd24Hr = _cryptoCurrencyBll.VolumeUsd24Hr,
-                ChangePercent24Hr = _cryptoCurrencyBll.ChangePercent24Hr,
-                PriceChange24h = _cryptoCurrencyBll.PriceChange24h,
-                PriceChangePercentage24h = _cryptoCurrencyBll.PriceChangePercentage24h,
-                CirculatingSupply = _cryptoCurrencyBll.CirculatingSupply,
-                TotalSupply = _cryptoCurrencyBll.TotalSupply,
-                MaxSupply = _cryptoCurrencyBll.MaxSupply,
-                MarketCapRank = _cryptoCurrencyBll.MarketCapRank,
-                Image = _cryptoCurrencyBll.Image,
-                Explorer = _cryptoCurrencyBll.Explorer,
-                LastUpdated = _cryptoCurrencyBll.LastUpdated
+                IdCap = cryptoCurrencyBll.IdCap,
+                IdGecko = cryptoCurrencyBll.IdGecko,
+                Symbol = cryptoCurrencyBll.Symbol,
+                Name = cryptoCurrencyBll.Name,
+                CurrentPrice = cryptoCurrencyBll.CurrentPrice,
+                MarketCap = cryptoCurrencyBll.MarketCap,
+                MarketCapUsd = cryptoCurrencyBll.MarketCapUsd,
+                TotalVolume = cryptoCurrencyBll.TotalVolume,
+                VolumeUsd24Hr = cryptoCurrencyBll.VolumeUsd24Hr,
+                ChangePercent24Hr = cryptoCurrencyBll.ChangePercent24Hr,
+                PriceChange24H = cryptoCurrencyBll.PriceChange24H,
+                PriceChangePercentage24H = cryptoCurrencyBll.PriceChangePercentage24H,
+                CirculatingSupply = cryptoCurrencyBll.CirculatingSupply,
+                TotalSupply = cryptoCurrencyBll.TotalSupply,
+                MaxSupply = cryptoCurrencyBll.MaxSupply,
+                MarketCapRank = cryptoCurrencyBll.MarketCapRank,
+                Image = cryptoCurrencyBll.Image,
+                Explorer = cryptoCurrencyBll.Explorer,
+                LastUpdated = cryptoCurrencyBll.LastUpdated
             };
         }
 
-        public List<CryptoCurrencyModel> BlltoUIConvertor(List<Cryptocurrency> _cryptoCurrencyBll)
+        public List<CryptoCurrencyModel> BlltoUiConvertor(List<Cryptocurrency> cryptoCurrencyBll)
         {
             var cryptoCurrencyModel = new List<CryptoCurrencyModel>();
-            foreach (var item in _cryptoCurrencyBll)
+            foreach (var item in cryptoCurrencyBll)
             {
-                cryptoCurrencyModel.Add(BlltoUICovnertor(item));
+                cryptoCurrencyModel.Add(BlltoUiCovnertor(item));
             }
 
             return cryptoCurrencyModel;
         }
+
+        public DetailedInfoModel CryptoConcurrenceDetailedInfoModel(CryptoCurrencyModel cryptocurrency)
+        {
+            var AdditionalInfo = GetAdditionalCoinInfo(cryptocurrency.IdGecko);
+            
+            return new DetailedInfoModel
+            {
+                Id = cryptocurrency.IdGecko, 
+                Symbol = cryptocurrency.Symbol,
+                Name = cryptocurrency.Name,
+                ImageUrl = cryptocurrency.Image,
+                CurrentPrice = cryptocurrency.CurrentPrice ?? 0, 
+                MarketCap = cryptocurrency.MarketCap ?? 0,
+                TotalVolume = cryptocurrency.TotalVolume ?? 0,
+                PriceChange24H = cryptocurrency.PriceChange24H ?? 0,
+                PriceChangePercentage24H = cryptocurrency.PriceChangePercentage24H ?? 0,
+                CirculatingSupply = cryptocurrency.CirculatingSupply ?? 0,
+                TotalSupply = cryptocurrency.TotalSupply ?? 0,
+                MaxSupply = cryptocurrency.MaxSupply ?? 0,
+                HomePageLink = AdditionalInfo.Homepage,
+                RepositoryLink = AdditionalInfo.Repository
+            };
+        }
+
+        #region Helpers
+
+        private AdditionalCoinInfoModel GetAdditionalCoinInfo (string id)
+        {
+            var manager = new CryptoInfoManager(new CredentialManager());
+            
+            return manager.GetAddtionalInfo(id);
+        }
+
+        #endregion
     }
 }

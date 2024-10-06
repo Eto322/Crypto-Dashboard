@@ -45,8 +45,8 @@ namespace BLL.Manager.Helper
                         mergedCrypto.IdGecko = geckoCrypto.IdGecko;
                         mergedCrypto.MarketCap = geckoCrypto.MarketCap;
                         mergedCrypto.TotalVolume = geckoCrypto.TotalVolume;
-                        mergedCrypto.PriceChange24h = geckoCrypto.PriceChange24h;
-                        mergedCrypto.PriceChangePercentage24h = geckoCrypto.PriceChangePercentage24h;
+                        mergedCrypto.PriceChange24H = geckoCrypto.PriceChange24H;
+                        mergedCrypto.PriceChangePercentage24H = geckoCrypto.PriceChangePercentage24H;
                         mergedCrypto.TotalSupply = geckoCrypto.TotalSupply;
                         mergedCrypto.Image = geckoCrypto.Image;
                         mergedCrypto.LastUpdated = geckoCrypto.LastUpdated;
@@ -75,8 +75,8 @@ namespace BLL.Manager.Helper
                             MarketCap = geckoCrypto.MarketCap,
                             TotalVolume = geckoCrypto.TotalVolume,
                             CurrentPrice = geckoCrypto.CurrentPrice,
-                            PriceChange24h = geckoCrypto.PriceChange24h,
-                            PriceChangePercentage24h = geckoCrypto.PriceChangePercentage24h,
+                            PriceChange24H = geckoCrypto.PriceChange24H,
+                            PriceChangePercentage24H = geckoCrypto.PriceChangePercentage24H,
                             MarketCapRank = geckoCrypto.MarketCapRank,
                             Image = geckoCrypto.Image,
                             LastUpdated = geckoCrypto.LastUpdated

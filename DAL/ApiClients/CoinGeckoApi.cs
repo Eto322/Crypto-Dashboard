@@ -38,7 +38,12 @@ namespace DAL.ApiClients
             return GetResponse(url);
         }
 
-
+        public string GetCryptoFullInfoById(string id)
+        {
+            string url = $"https://api.coingecko.com/api/v3/coins/{id}";
+            return GetResponse(url);
+        }
+        
         public string GetCryptoDetailsById(List<string>ids, string vsCurrency = "usd")
         {
             string idsString = string.Join(",", ids);

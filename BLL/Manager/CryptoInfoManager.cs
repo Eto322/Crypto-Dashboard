@@ -18,6 +18,7 @@ namespace BLL.Manager
         private readonly CoinCapApi _coinCapAPi;
         private readonly CredentialManager _credentialManager;
         private readonly CryptocurrencyDeserializer _cryptocurrencyDeserializer;
+        private readonly AdditionalCoinInfoDeserializer _additionalCoinInfoDeserializer;
 
         public CryptoInfoManager(CredentialManager credentialManager)
         {
@@ -25,14 +26,15 @@ namespace BLL.Manager
             _coinGeckoAPi = new CoinGeckoApi(_credentialManager.GetGeckoApiKey());
             _coinCapAPi = new CoinCapApi(_credentialManager.GetCoinCapApiKey());
             _cryptocurrencyDeserializer = new CryptocurrencyDeserializer();
+            _additionalCoinInfoDeserializer= new AdditionalCoinInfoDeserializer();
         }
 
         public List<Cryptocurrency> GetTopNCryptos(int n)
         {
             
-            if (!_credentialManager._isCoinCapApiExist && !_credentialManager._isCoinGeckoApiKeyExist)
+            if (!_credentialManager.IsCoinCapApiExist && !_credentialManager.IsCoinGeckoApiKeyExist)
             {
-                Console.WriteLine("No API keys are available.");
+                
                 return new List<Cryptocurrency>(); 
             }
 
@@ -47,7 +49,7 @@ namespace BLL.Manager
 
         public List<Cryptocurrency> GetSearchCryptocurrencies(string query)
         {
-            if (!_credentialManager._isCoinCapApiExist && !_credentialManager._isCoinGeckoApiKeyExist)
+            if (!_credentialManager.IsCoinCapApiExist && !_credentialManager.IsCoinGeckoApiKeyExist)
             {
                 Console.WriteLine("No API keys are available.");
                 return new List<Cryptocurrency>();
@@ -61,9 +63,25 @@ namespace BLL.Manager
             return searched;
         }
 
+        public AdditionalCoinInfoModel GetAddtionalInfo(string id)
+        {
+            if (!_credentialManager.IsCoinGeckoApiKeyExist)
+            {
+                return new AdditionalCoinInfoModel();
+            }
+
+            return FetchAdditionalCoinInfo(id);
+        }
+
         #region Helpers
 
-        
+        private AdditionalCoinInfoModel FetchAdditionalCoinInfo (string id)
+        {
+            var geckoData = _coinGeckoAPi.GetCryptoFullInfoById(id);
+            var data = _additionalCoinInfoDeserializer.Deserializer(geckoData);
+            return data;
+
+        }
         private List<Cryptocurrency> FetchTopFromGecko(int n)
         {
             var geckoData = _coinGeckoAPi.GetTopCryptos(n);
@@ -91,9 +109,9 @@ namespace BLL.Manager
             var capCryptocurrencies = _cryptocurrencyDeserializer.Deserialize(capData, true);
             return capCryptocurrencies;
         }
-            
-        
 
+        
+        
         #endregion
 
     }

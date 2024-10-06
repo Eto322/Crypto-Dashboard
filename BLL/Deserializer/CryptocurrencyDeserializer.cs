@@ -79,8 +79,8 @@ namespace BLL.Deserializer
                     MarketCap = _helper.GetDecimalValue(item, "market_cap"),
                     TotalVolume = _helper.GetDecimalValue(item, "total_volume"),
                     CurrentPrice = _helper.GetDecimalValue(item, "current_price"),
-                    PriceChange24h = _helper.GetDecimalValue(item, "price_change_24h"),
-                    PriceChangePercentage24h = _helper.GetDecimalValue(item, "price_change_percentage_24h"),
+                    PriceChange24H = _helper.GetDecimalValue(item, "price_change_24h"),
+                    PriceChangePercentage24H = _helper.GetDecimalValue(item, "price_change_percentage_24h"),
                     MarketCapRank = _helper.GetDecimalValue(item, "market_cap_rank"),
                     Image = _helper.GetStringValue(item, "image"),
                     LastUpdated = _helper.GetStringValue(item, "last_updated")

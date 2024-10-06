@@ -19,8 +19,8 @@ namespace UI.Model
         private decimal? _totalVolume;
         private decimal? _volumeUsd24Hr;
         private decimal? _changePercent24Hr;
-        private decimal? _priceChange24h;
-        private decimal? _priceChangePercentage24h;
+        private decimal? _priceChange24H;
+        private decimal? _priceChangePercentage24H;
         private decimal? _circulatingSupply;
         private decimal? _totalSupply;
         private decimal? _maxSupply;
@@ -89,16 +89,16 @@ namespace UI.Model
             set { _changePercent24Hr = value; NotifyOfPropertyChanged(); }
         }
 
-        public decimal? PriceChange24h
+        public decimal? PriceChange24H
         {
-            get => _priceChange24h;
-            set { _priceChange24h = value; NotifyOfPropertyChanged(); }
+            get => _priceChange24H;
+            set { _priceChange24H = value; NotifyOfPropertyChanged(); }
         }
 
-        public decimal? PriceChangePercentage24h
+        public decimal? PriceChangePercentage24H
         {
-            get => _priceChangePercentage24h;
-            set { _priceChangePercentage24h = value; NotifyOfPropertyChanged(); }
+            get => _priceChangePercentage24H;
+            set { _priceChangePercentage24H = value; NotifyOfPropertyChanged(); }
         }
 
         public decimal? CirculatingSupply

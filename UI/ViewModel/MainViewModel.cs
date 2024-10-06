@@ -162,8 +162,8 @@ namespace UI.ViewModel
 
         #region Helpers
 
-        private CryptoInfoManager cryptoInfoManager;
-        private ModelConvertor convertor;
+        private CryptoInfoManager _cryptoInfoManager;
+        private ModelConvertor _convertor;
 
         #region SearchHelpers
 
@@ -183,13 +183,13 @@ namespace UI.ViewModel
         public ObservableCollection<CryptoCurrencyModel> TopCoinsSearchByTop()
         {
             return new ObservableCollection<CryptoCurrencyModel>(
-                convertor.BlltoUIConvertor(cryptoInfoManager.GetTopNCryptos(SelectedNumberOfTopCurrencies)));
+                _convertor.BlltoUiConvertor(_cryptoInfoManager.GetTopNCryptos(SelectedNumberOfTopCurrencies)));
         }
 
         public ObservableCollection<CryptoCurrencyModel> SearchCoin()
         {
             return new ObservableCollection<CryptoCurrencyModel>(
-                convertor.BlltoUIConvertor(cryptoInfoManager.GetSearchCryptocurrencies(TopCoinsSearchBar)));
+                _convertor.BlltoUiConvertor(_cryptoInfoManager.GetSearchCryptocurrencies(TopCoinsSearchBar)));
         }
 
         #endregion
@@ -227,10 +227,12 @@ namespace UI.ViewModel
         {
             IsDarkTheme = true;
             SelectedNumberOfTopCurrencies = TopCurrenciesOptions[1];
-            cryptoInfoManager = new CryptoInfoManager(new CredentialManager());
-            convertor = new ModelConvertor();
+            _cryptoInfoManager = new CryptoInfoManager(new CredentialManager());
+            _convertor = new ModelConvertor();
 
             TopCurrencies = TopCoinsSearchByTop();
+            //var asd = _convertor.CryptoConcurrenceDetailedInfoModel(TopCurrencies[0]);
+            //Console.WriteLine();
         }
     }
 }

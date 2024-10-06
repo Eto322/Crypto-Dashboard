@@ -145,9 +145,9 @@
                             <TextBlock Text="Total Volume:" FontWeight="Bold" />
                             <TextBlock Text="{Binding TotalVolume, StringFormat={}{0:C}}" />
                             <TextBlock Text="Price Change (24h):" FontWeight="Bold" />
-                            <TextBlock Text="{Binding PriceChange24h, StringFormat={}{0:C}}" />
+                            <TextBlock Text="{Binding PriceChange24H, StringFormat={}{0:C}}" />
                             <TextBlock Text="Price Change Percentage (24h):" FontWeight="Bold" />
-                            <TextBlock Text="{Binding PriceChangePercentage24h, StringFormat={}{0:P2}}" />
+                            <TextBlock Text="{Binding PriceChangePercentage24H, StringFormat={}{0:P2}}" />
                             <TextBlock Text="Circulating Supply:" FontWeight="Bold" />
                             <TextBlock Text="{Binding CirculatingSupply}" />
                             <TextBlock Text="Total Supply:" FontWeight="Bold" />
@@ -169,6 +169,8 @@
                                     <materialDesign:PackIcon
                                         Kind="Github"/>
                                 </Button>
+
+
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>
