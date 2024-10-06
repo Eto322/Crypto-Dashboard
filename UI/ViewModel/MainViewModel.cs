@@ -49,6 +49,24 @@ namespace UI.ViewModel
 
         #region TopCoinsCommandRegion
 
+        private ICommand _getDetailedInfo;
+
+        public ICommand GetDetailedInfo
+        {
+            get
+            {
+                if (_getDetailedInfo == null)
+                {
+                    _getDetailedInfo = new RelayCommand(param =>
+                    {
+                        SelectedIndex = 1;
+                    });
+                }
+
+                return _getDetailedInfo;
+            }
+        }
+
         private ICommand _searchTopCoins;
 
         public ICommand SearchTopCoinsCommand
@@ -70,6 +88,22 @@ namespace UI.ViewModel
         #endregion
 
         #region SettingsRegion
+
+        private int _selectedIndex;
+
+        public int SelectedIndex
+        {
+            get => _selectedIndex;
+
+            set
+            {
+                if (_selectedIndex != value)
+                {
+                    _selectedIndex = value;
+                    NotifyOfPropertyChanged();
+                }
+            }
+        }
 
         private bool _isDarkTheme;
         public bool IsDarkTheme

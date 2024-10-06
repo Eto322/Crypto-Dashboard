@@ -24,7 +24,8 @@
             materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
             SnapsToDevicePixels="True"
             Style="{StaticResource MaterialDesignNavigationRailTabControl}"
-            TabStripPlacement="Left">
+            TabStripPlacement="Left"
+            SelectedIndex="{Binding SelectedIndex}">
             <TabItem>
                 <TabItem.Header>
                     <StackPanel
@@ -84,7 +85,9 @@
                                     <DataTemplate>
                                         <Button
                                             Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                                            ToolTip="MaterialDesignFloatingActionMiniLightButton">
+                                            ToolTip="More info"
+                                            Command="{Binding DataContext.GetDetailedInfo,
+                                            RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}">
                                             <materialDesign:PackIcon Kind="Magnify"/>
                                         </Button>
                                     </DataTemplate>
@@ -133,14 +136,40 @@
 
 
                         <StackPanel Margin="10">
-                            <TextBlock Text="aaaaaaaaa" FontWeight="Bold" FontSize="25"/>
-                            <TextBlock Text="aaaaaaaaaaa" FontStyle="Italic" FontSize="20"/>
-                            <TextBlock Text="aaaaaaaaaaa"/>
-                            <TextBlock Text="aaaaaaaaa"/>
-                            <TextBlock Text="aaaaaaaaaa"/>
-                            <TextBlock Text="aaaaaaaaaaaa"/>
-                            <TextBlock Text="aaaaaaaa"/>
-
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="25" />
+                            <TextBlock Text="{Binding Symbol}" FontStyle="Italic" FontSize="20" />
+                            <TextBlock Text="Current Price:" FontWeight="Bold" />
+                            <TextBlock Text="{Binding CurrentPrice, StringFormat={}{0:C}}" />
+                            <TextBlock Text="Market Cap:" FontWeight="Bold" />
+                            <TextBlock Text="{Binding MarketCap, StringFormat={}{0:C}}" />
+                            <TextBlock Text="Total Volume:" FontWeight="Bold" />
+                            <TextBlock Text="{Binding TotalVolume, StringFormat={}{0:C}}" />
+                            <TextBlock Text="Price Change (24h):" FontWeight="Bold" />
+                            <TextBlock Text="{Binding PriceChange24h, StringFormat={}{0:C}}" />
+                            <TextBlock Text="Price Change Percentage (24h):" FontWeight="Bold" />
+                            <TextBlock Text="{Binding PriceChangePercentage24h, StringFormat={}{0:P2}}" />
+                            <TextBlock Text="Circulating Supply:" FontWeight="Bold" />
+                            <TextBlock Text="{Binding CirculatingSupply}" />
+                            <TextBlock Text="Total Supply:" FontWeight="Bold" />
+                            <TextBlock Text="{Binding TotalSupply}" />
+                            <TextBlock Text="Max Supply:" FontWeight="Bold" />
+                            <TextBlock Text="{Binding MaxSupply}" />
+                            <StackPanel Orientation="Horizontal">
+                                <Button Margin="5"
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                    ToolTip="MaterialDesignFloatingActionMiniLightButton"
+                                >
+                                    <materialDesign:PackIcon
+                                        Kind="Web"/>
+                                </Button>
+                                <Button Margin="5"
+                                        Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                        ToolTip="MaterialDesignFloatingActionMiniLightButton"
+                                >
+                                    <materialDesign:PackIcon
+                                        Kind="Github"/>
+                                </Button>
+                            </StackPanel>
                         </StackPanel>
                     </StackPanel>
 
