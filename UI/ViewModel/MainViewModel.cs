@@ -21,6 +21,18 @@ namespace UI.ViewModel
 
         #region TopCoinsRegion
 
+        private string _topCoinsSearchBar;
+
+        public string TopCoinsSearchBar
+        {
+            get => _topCoinsSearchBar;
+            set
+            {
+                _topCoinsSearchBar = value;
+                NotifyOfPropertyChanged();
+            }
+        }
+        
         private ObservableCollection<CryptoCurrencyModel> _topCurrencies;
 
         public ObservableCollection<CryptoCurrencyModel> TopCurrencies
@@ -37,7 +49,23 @@ namespace UI.ViewModel
 
         #region TopCoinsCommandRegion
 
+        private ICommand _searchTopCoins;
 
+        public ICommand SearchTopCoinsCommand
+        {
+            get
+            {
+                if (_searchTopCoins == null)
+                {
+                    _searchTopCoins = new RelayCommand(param =>
+                    {
+                        Task.Run(() => TopCurrencies = TopCoinsSearch());
+                    });
+                }
+
+                return _searchTopCoins;
+            }
+        }
 
         #endregion
 
@@ -103,15 +131,41 @@ namespace UI.ViewModel
         private CryptoInfoManager cryptoInfoManager;
         private ModelConvertor convertor;
 
+        #region SearchHelpers
+
+        public ObservableCollection<CryptoCurrencyModel> TopCoinsSearch()
+        {
+            if (string.IsNullOrEmpty(TopCoinsSearchBar))
+            {
+
+                return TopCoinsSearchByTop();
+            }
+
+            throw new NotImplementedException();
+            return null;
+
+        }
+
+        public ObservableCollection<CryptoCurrencyModel> TopCoinsSearchByTop()
+        {
+            return new ObservableCollection<CryptoCurrencyModel>(
+                convertor.BlltoUIConvertor(cryptoInfoManager.GetTopNCryptos(SelectedNumberOfTopCurrencies)));
+        }
+
+        #endregion
+
+
+        #region ThemeHelper
+
         private readonly PaletteHelper _paletteHelper = new PaletteHelper();
         private void ChangeTheme()
         {
-            
+
 
             if (IsDarkTheme)
             {
-                _paletteHelper.SetTheme(MaterialDesignThemes.Wpf.Theme.Create(BaseTheme.Dark, 
-                    (Color)Application.Current.Resources["PrimaryColorDark"], 
+                _paletteHelper.SetTheme(MaterialDesignThemes.Wpf.Theme.Create(BaseTheme.Dark,
+                    (Color)Application.Current.Resources["PrimaryColorDark"],
                     (Color)Application.Current.Resources["SecondaryColorDark"])
                 );
             }
@@ -126,15 +180,17 @@ namespace UI.ViewModel
 
         #endregion
 
+
+        #endregion
+
         public MainViewModel()
         {
-            IsDarkTheme= true;
+            IsDarkTheme = true;
             SelectedNumberOfTopCurrencies = TopCurrenciesOptions[1];
             cryptoInfoManager = new CryptoInfoManager(new CredentialManager());
-            convertor= new ModelConvertor();
-            
-            TopCurrencies = new ObservableCollection<CryptoCurrencyModel>(
-                convertor.BlltoUIConvertor(cryptoInfoManager.GetTopNCryptos(SelectedNumberOfTopCurrencies)));
+            convertor = new ModelConvertor();
+
+            TopCurrencies = TopCoinsSearchByTop();
         }
     }
 }

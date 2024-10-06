@@ -18,7 +18,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="0.1*"/>
+            
         </Grid.RowDefinitions>
         <TabControl 
                     materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
@@ -54,12 +54,13 @@
                         <TextBox Grid.Column="0" 
                                  Height="30" 
                                  VerticalAlignment="Center" 
-                                 Text="" />
+                                 Text="{Binding TopCoinsSearchBar}" />
 
                         <Button Grid.Column="1" 
                                 Content="Search" 
                                 Height="30" 
-                                Margin="10,0,0,0" />
+                                Margin="10,0,0,0" 
+                                Command="{Binding SearchTopCoinsCommand}"/>
 
                     </Grid>
 
