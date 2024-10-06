@@ -17,6 +17,11 @@ namespace BLL.Deserializer
         public List<Cryptocurrency> Deserialize(string json, bool isCoinCap)
         {
             _helper=new DeserializerHelper();
+            if (string.IsNullOrEmpty(json))
+            {
+                return new List<Cryptocurrency>();
+            }
+            
             if (isCoinCap)
             {
                 

@@ -41,7 +41,7 @@ namespace DAL.ApiClients
             catch (HttpRequestException e)
             {
                 Console.WriteLine($"Request error: {e.Message}");
-                return e.Message;
+                return null;
             }
         }
     }

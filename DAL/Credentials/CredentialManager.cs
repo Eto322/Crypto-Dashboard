@@ -11,6 +11,8 @@ namespace DAL.Credentials
     {
         private readonly string _geckoApiKey;
         private readonly string _coincapApiKey;
+        public  readonly bool _isCoinCapApiExist = false;
+        public  readonly bool _isCoinGeckoApiKeyExist = false;
         public CredentialManager()
         {
             // Get the path to the project's root directory
@@ -29,6 +31,11 @@ namespace DAL.Credentials
 
             // Retrieve the CoinCap API key from the configuration settings
             _coincapApiKey = configuration["ApiSettings:CoinCapApiKey"];
+
+            // Set the flags based on whether the API keys exist
+            _isCoinGeckoApiKeyExist = !string.IsNullOrEmpty(_geckoApiKey);
+            _isCoinCapApiExist = !string.IsNullOrEmpty(_coincapApiKey);
+
         }
 
         public string GetGeckoApiKey()
