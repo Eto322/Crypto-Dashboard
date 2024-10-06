@@ -10,8 +10,8 @@
             <Color x:Key="PrimaryColorDark">#D4AF37</Color>
             <Color x:Key="SecondaryColorDark">#C0C0C0</Color>
 
-            <!-- Light Theme primary Lemon Chiffon, secondary Gainsboro -->
-            <Color x:Key="PrimaryColorLight">#FFFACD</Color>
+            <!-- Light Theme primary Royal Blue, secondary Gainsboro -->
+            <Color x:Key="PrimaryColorLight">#002366</Color>
             <Color x:Key="SecondaryColorLight">#E0E0E0</Color>
 
             <ResourceDictionary.MergedDictionaries>
