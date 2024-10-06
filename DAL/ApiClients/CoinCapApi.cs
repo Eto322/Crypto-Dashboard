@@ -24,13 +24,28 @@ namespace DAL.ApiClients
             _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {_apikey}");
         }
 
+        
+        public string SearchCoinCap(string query)
+        {
+            string url = $"https://api.coincap.io/v2/assets?search={query}";
+
+            return GetResponse(url);
+        }
+
+
         public string GetTopCryptos(int limit)
         {
             string url = $"https://api.coincap.io/v2/assets?limit={limit}";
 
+            return GetResponse(url);
+
+        }
+
+        private string GetResponse(string url)
+        {
             try
             {
-                
+
                 HttpResponseMessage response = _client.GetAsync(url).Result;
                 response.EnsureSuccessStatusCode();
 
@@ -44,7 +59,6 @@ namespace DAL.ApiClients
                 return null;
             }
         }
-
     }
 
 

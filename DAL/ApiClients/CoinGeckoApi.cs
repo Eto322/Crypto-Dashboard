@@ -24,10 +24,22 @@ namespace DAL.ApiClients
             _client.DefaultRequestHeaders.Add("x-cg-demo-api-key", _apikey);
         }
 
+        public string SearchCoins(string query)
+        {
+            string url = $"https://api.coingecko.com/api/v3/search?query={query}";
+
+            return GetResponse(url);
+        }
+
         public string GetTopCryptos(int limit, string vsCurrency = "usd", int pageNumber = 1)
         {
             string url = $"https://api.coingecko.com/api/v3/coins/markets?vs_currency={vsCurrency}&order=market_cap_desc&per_page={limit}&page={pageNumber}&sparkline=false";
 
+            return GetResponse(url);
+        }
+
+        private string GetResponse (string url)
+        {
             try
             {
                 HttpResponseMessage response = _client.GetAsync(url).Result;
