@@ -24,6 +24,15 @@ namespace DAL.ApiClients
             _client.DefaultRequestHeaders.Add("x-cg-demo-api-key", _apikey);
         }
 
+        public string GetCandelsById(string id,string days="7",string precision="2",string vsCurrency="usd")
+        {
+
+            string url = $"https://api.coingecko.com/api/v3/coins/{id}/ohlc?vs_currency={vsCurrency}&days={days}&precision={precision}";
+
+            return GetResponse(url);
+            
+           
+        }
         public string SearchCoins(string query)
         {
             string url = $"https://api.coingecko.com/api/v3/search?query={query}";

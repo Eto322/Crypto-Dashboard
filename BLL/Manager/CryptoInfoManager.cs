@@ -20,7 +20,7 @@ namespace BLL.Manager
         private readonly CredentialManager _credentialManager;
         private readonly CryptocurrencyDeserializer _cryptocurrencyDeserializer;
         private readonly AdditionalCoinInfoDeserializer _additionalCoinInfoDeserializer;
-
+        private readonly CandlesDeserializer _candlesDeserializer;
         public CryptoInfoManager(CredentialManager credentialManager)
         {
             _credentialManager = credentialManager;
@@ -28,19 +28,20 @@ namespace BLL.Manager
             _coinCapAPi = new CoinCapApi(_credentialManager.GetCoinCapApiKey());
             _cryptocurrencyDeserializer = new CryptocurrencyDeserializer();
             _additionalCoinInfoDeserializer= new AdditionalCoinInfoDeserializer();
+            _candlesDeserializer = new CandlesDeserializer();
         }
 
-        public List<Cryptocurrency> GetTopNCryptos(int n)
+        public List<CryptocurrencyModel> GetTopNCryptos(int n)
         {
             
             if (!_credentialManager.IsCoinCapApiExist && !_credentialManager.IsCoinGeckoApiKeyExist)
             {
                 
-                return new List<Cryptocurrency>(); 
+                return new List<CryptocurrencyModel>(); 
             }
 
-            List<Cryptocurrency> geckoData = FetchTopFromGecko(n);
-            List<Cryptocurrency> capData = FetchTopFromCap(n);
+            List<CryptocurrencyModel> geckoData = FetchTopFromGecko(n);
+            List<CryptocurrencyModel> capData = FetchTopFromCap(n);
 
             var topCryptos = new CryptocurrencyMerger().MergeCryptocurrencyData(capData, geckoData);
 
@@ -48,16 +49,16 @@ namespace BLL.Manager
             return topCryptos;
         }
 
-        public List<Cryptocurrency> GetSearchCryptocurrencies(string query)
+        public List<CryptocurrencyModel> GetSearchCryptocurrencies(string query)
         {
             if (!_credentialManager.IsCoinCapApiExist && !_credentialManager.IsCoinGeckoApiKeyExist)
             {
                 Console.WriteLine("No API keys are available.");
-                return new List<Cryptocurrency>();
+                return new List<CryptocurrencyModel>();
             }
 
-            List<Cryptocurrency> geckoData = FetchSearchFromGecko(query);
-            List<Cryptocurrency> capData = FetchSearchFromCap(query);
+            List<CryptocurrencyModel> geckoData = FetchSearchFromGecko(query);
+            List<CryptocurrencyModel> capData = FetchSearchFromCap(query);
 
             var searched = new CryptocurrencyMerger().MergeCryptocurrencyData(capData, geckoData);
 
@@ -78,6 +79,17 @@ namespace BLL.Manager
             return Additionalinfo;
         }
 
+        public List<CandlestickModel> GetCandelsById(string id, string days = "7")
+        {
+
+            if (!_credentialManager.IsCoinGeckoApiKeyExist)
+            {
+                return new List<CandlestickModel>();
+            }
+
+            return FetchCandlestickModels(id, days);
+        }
+
         #region Helpers
 
         private AdditionalCoinInfoModel FetchAdditionalCoinInfo (string id)
@@ -87,34 +99,40 @@ namespace BLL.Manager
             return data;
 
         }
-        private List<Cryptocurrency> FetchTopFromGecko(int n)
+        private List<CryptocurrencyModel> FetchTopFromGecko(int n)
         {
             var geckoData = _coinGeckoAPi.GetTopCryptos(n);
             var geckoCryptocurrencies = _cryptocurrencyDeserializer.Deserialize(geckoData, false);
             return geckoCryptocurrencies;
         }
 
-        private List<Cryptocurrency> FetchTopFromCap(int n)
+        private List<CryptocurrencyModel> FetchTopFromCap(int n)
         {
             var capData = _coinCapAPi.GetTopCryptos(n);
             var capCryptocurrencies = _cryptocurrencyDeserializer.Deserialize(capData, true);
             return capCryptocurrencies;
         }
 
-        private List<Cryptocurrency> FetchSearchFromGecko(string query)
+        private List<CryptocurrencyModel> FetchSearchFromGecko(string query)
         {
             var geckoData = _coinGeckoAPi.SearchCoins(query);
             var geckoCryptocurrencies = _cryptocurrencyDeserializer.Deserialize(geckoData, false);
             return geckoCryptocurrencies;
         }
 
-        private List<Cryptocurrency> FetchSearchFromCap(string query)
+        private List<CryptocurrencyModel> FetchSearchFromCap(string query)
         {
             var capData = _coinCapAPi.SearchCoinCap(query);
             var capCryptocurrencies = _cryptocurrencyDeserializer.Deserialize(capData, true);
             return capCryptocurrencies;
         }
 
+        private List<CandlestickModel> FetchCandlestickModels(string id, string days = "7")
+        {
+            var geckoData = _coinGeckoAPi.GetCandelsById(id, days);
+            var geckoCandels = _candlesDeserializer.Deserialize(geckoData);
+            return geckoCandels;
+        }
         
         
         #endregion

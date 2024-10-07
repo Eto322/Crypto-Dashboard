@@ -13,6 +13,8 @@ using BLL.Manager;
 using DAL.Credentials;
 using UI.Inf;
 using UI.Model;
+using BLL.Model;
+using OxyPlot;
 
 namespace UI.ViewModel
 {
@@ -203,13 +205,13 @@ namespace UI.ViewModel
         public ObservableCollection<CryptoCurrencyModel> TopCoinsSearchByTop()
         {
             return new ObservableCollection<CryptoCurrencyModel>(
-                _convertor.BlltoUiConvertor(_cryptoInfoManager.GetTopNCryptos(SelectedNumberOfTopCurrencies)));
+                _convertor.ConvertBllToUiCryptoCurrencies(_cryptoInfoManager.GetTopNCryptos(SelectedNumberOfTopCurrencies)));
         }
 
         public ObservableCollection<CryptoCurrencyModel> SearchCoin()
         {
             return new ObservableCollection<CryptoCurrencyModel>(
-                _convertor.BlltoUiConvertor(_cryptoInfoManager.GetSearchCryptocurrencies(TopCoinsSearchBar)));
+                _convertor.ConvertBllToUiCryptoCurrencies(_cryptoInfoManager.GetSearchCryptocurrencies(TopCoinsSearchBar)));
         }
 
         #endregion
@@ -258,9 +260,59 @@ namespace UI.ViewModel
             }
         }
 
+        private ObservableCollection<CandleStickItemModel> _candlestickItemsForDraw;
+
+        public ObservableCollection<CandleStickItemModel> CandlestickItemsForDraw
+        {
+            get => _candlestickItemsForDraw;
+            set
+            {
+                _candlestickItemsForDraw = value;
+                NotifyOfPropertyChanged();
+            }
+        }
+
+        private PlotModel _candlestickPlot;
+        public PlotModel CandlestickPlot
+        {
+            get => _candlestickPlot;
+            set
+            {
+                _candlestickPlot = value;
+                NotifyOfPropertyChanged();
+            }
+        }
+
+        #region CandlesstickHelper
+
+        private void LoadCandlestickData(CryptoCurrencyModel model)
+        {
+            
+            var candlestickModels = _cryptoInfoManager.GetCandelsById(model.IdGecko);
+
+            if (CandlestickItemsForDraw!=null)
+            {
+                CandlestickItemsForDraw.Clear();
+            }
+           
+
+            var candlestickItemModel = _convertor.ConvertToCandleStickItems(candlestickModels);
+            foreach (var item in candlestickItemModel)
+            {
+                CandlestickItemsForDraw.Add(item);
+            }
+
+            CandlestickPlot = CandlestickPlotModel.CreateCandlestickPlotModel(CandlestickItemsForDraw.ToList());
+            Console.WriteLine();
+        }
+        
+
+        #endregion
         #endregion
 
         #region DetailedInfoCommands
+
+
 
         private ICommand _goTotheCoinHomePageCommand;
 
@@ -317,6 +369,11 @@ namespace UI.ViewModel
             TopCurrencies = TopCoinsSearchByTop();
 
             DetailedInfoModel = _convertor.CryptoConcurrenceToDetailedInfoModel(TopCurrencies[0]);
+            CandlestickItemsForDraw = new ObservableCollection<CandleStickItemModel>();
+
+            LoadCandlestickData(TopCurrencies[0]);
+            
+            Console.WriteLine();
            
         }
     }

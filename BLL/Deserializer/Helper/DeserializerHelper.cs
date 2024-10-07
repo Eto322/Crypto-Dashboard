@@ -39,5 +39,71 @@ namespace BLL.Deserializer.Helper
                 return null;
             }
         }
+        // Overloaded method for index-based extraction(CoinGecko candles)
+        public decimal? GetDecimalValue(JToken item, int index)
+        {
+            var valueStr = item?[index]?.ToString();
+            if (string.IsNullOrEmpty(valueStr))
+            {
+                return null;
+            }
+
+            try
+            {
+                return decimal.Parse(valueStr);
+            }
+            catch (FormatException)
+            {
+                return null;
+            }
+            catch (OverflowException)
+            {
+                return null;
+            }
+        }
+        public long? GetLongValue(JToken item, string key)
+        {
+            var valueStr = item?[key]?.ToString();
+            if (string.IsNullOrEmpty(valueStr))
+            {
+                return null;
+            }
+
+            try
+            {
+                return long.Parse(valueStr);
+            }
+            catch (FormatException)
+            {
+                return null;
+            }
+            catch (OverflowException)
+            {
+                return null;
+            }
+        }
+
+        // Overloaded GetLongValue for index-based extraction(CoinGecko candles)
+        public long? GetLongValue(JToken item, int index)
+        {
+            var valueStr = item?[index]?.ToString();
+            if (string.IsNullOrEmpty(valueStr))
+            {
+                return null;
+            }
+
+            try
+            {
+                return long.Parse(valueStr);
+            }
+            catch (FormatException)
+            {
+                return null;
+            }
+            catch (OverflowException)
+            {
+                return null;
+            }
+        }
     }
 }

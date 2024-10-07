@@ -14,12 +14,12 @@ namespace BLL.Deserializer
     public class CryptocurrencyDeserializer
     {
         private DeserializerHelper _helper;
-        public List<Cryptocurrency> Deserialize(string json, bool isCoinCap)
+        public List<CryptocurrencyModel> Deserialize(string json, bool isCoinCap)
         {
             _helper=new DeserializerHelper();
             if (string.IsNullOrEmpty(json))
             {
-                return new List<Cryptocurrency>();
+                return new List<CryptocurrencyModel>();
             }
             
             if (isCoinCap)
@@ -36,13 +36,13 @@ namespace BLL.Deserializer
             }
         }
 
-        private List<Cryptocurrency> ConvertCoinCapToCryptocurrency(JToken data)
+        private List<CryptocurrencyModel> ConvertCoinCapToCryptocurrency(JToken data)
         {
-            var cryptocurrencies = new List<Cryptocurrency>();
+            var cryptocurrencies = new List<CryptocurrencyModel>();
 
             foreach (var item in data)
             {
-                cryptocurrencies.Add(new Cryptocurrency
+                cryptocurrencies.Add(new CryptocurrencyModel
                 { 
                     IdCap = _helper.GetStringValue(item, "id"),
                     Symbol = _helper.GetStringValue(item, "symbol").ToUpper(),
@@ -62,13 +62,13 @@ namespace BLL.Deserializer
             return cryptocurrencies;
         }
 
-        private List<Cryptocurrency> ConvertCoinGeckoToCryptocurrency(JToken data)
+        private List<CryptocurrencyModel> ConvertCoinGeckoToCryptocurrency(JToken data)
         {
-            var cryptocurrencies = new List<Cryptocurrency>();
+            var cryptocurrencies = new List<CryptocurrencyModel>();
 
             foreach (var item in data)
             {
-                cryptocurrencies.Add(new Cryptocurrency
+                cryptocurrencies.Add(new CryptocurrencyModel
                 {
                     IdGecko = _helper.GetStringValue(item, "id"),
                     Symbol = _helper.GetStringValue(item, "symbol").ToUpper(),

@@ -9,10 +9,10 @@ namespace BLL.Manager.Helper
 {
     public class CryptocurrencyMerger
     {
-        public List<Cryptocurrency> MergeCryptocurrencyData(List<Cryptocurrency> capData,
-            List<Cryptocurrency> geckoData)
+        public List<CryptocurrencyModel> MergeCryptocurrencyData(List<CryptocurrencyModel> capData,
+            List<CryptocurrencyModel> geckoData)
         {
-            var mergedData = new List<Cryptocurrency>();
+            var mergedData = new List<CryptocurrencyModel>();
 
            
 
@@ -22,7 +22,7 @@ namespace BLL.Manager.Helper
                 // Iterate over CoinCap data and merge
                 foreach (var capCrypto in capData)
                 {
-                    var mergedCrypto = new Cryptocurrency
+                    var mergedCrypto = new CryptocurrencyModel
                     {
                         IdCap = capCrypto.IdCap,
                         Symbol = capCrypto.Symbol,
@@ -64,7 +64,7 @@ namespace BLL.Manager.Helper
                     // Only  it doesn't already exist in mergedData
                     if (!mergedData.Any(m => m.Symbol.Equals(geckoCrypto.Symbol, StringComparison.OrdinalIgnoreCase)))
                     {
-                        mergedData.Add(new Cryptocurrency
+                        mergedData.Add(new CryptocurrencyModel
                         {
                             IdGecko = geckoCrypto.IdGecko,
                             Symbol = geckoCrypto.Symbol,

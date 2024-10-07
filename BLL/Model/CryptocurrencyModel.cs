@@ -1,6 +1,6 @@
 ﻿namespace BLL.Model
 {
-    public class Cryptocurrency
+    public class CryptocurrencyModel
     {
         // Basic properties of the cryptocurrency
         public string IdCap { get; set; } //CoinCap

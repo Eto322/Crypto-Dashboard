@@ -13,7 +13,7 @@ namespace UI.Inf
 {
     public class ModelConvertor
     {
-        public CryptoCurrencyModel BlltoUiCovnertor(Cryptocurrency cryptoCurrencyBll)
+        public CryptoCurrencyModel BlltoUiCovnertor(CryptocurrencyModel cryptoCurrencyBll)
         {
             return new CryptoCurrencyModel
             {
@@ -39,7 +39,7 @@ namespace UI.Inf
             };
         }
 
-        public List<CryptoCurrencyModel> BlltoUiConvertor(List<Cryptocurrency> cryptoCurrencyBll)
+        public List<CryptoCurrencyModel> ConvertBllToUiCryptoCurrencies(List<CryptocurrencyModel> cryptoCurrencyBll)
         {
             var cryptoCurrencyModel = new List<CryptoCurrencyModel>();
             foreach (var item in cryptoCurrencyBll)
@@ -49,6 +49,8 @@ namespace UI.Inf
 
             return cryptoCurrencyModel;
         }
+
+       
 
         public DetailedInfoModel CryptoConcurrenceToDetailedInfoModel(CryptoCurrencyModel cryptocurrency)
         {
@@ -71,6 +73,25 @@ namespace UI.Inf
                 HomePageLink = AdditionalInfo.Homepage,
                 RepositoryLink = AdditionalInfo.Repository
             };
+        }
+
+        public List<CandleStickItemModel> ConvertToCandleStickItems(List<CandlestickModel> models)
+        {
+            var items = new List<CandleStickItemModel>();
+
+            foreach (var model in models)
+            {
+                items.Add(new CandleStickItemModel()
+                {
+                    X = model.Timestamp.Value,
+                    Open = (double)model.Open.Value,
+                    High = (double)model.High.Value,
+                    Low = (double)model.Low.Value,
+                    Close = (double)model.Close.Value
+                });
+            }
+
+            return items;
         }
 
         #region Helpers

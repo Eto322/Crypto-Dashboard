@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:UI.View"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:viewModel="clr-namespace:UI.ViewModel"
+        xmlns:oxy="http://oxyplot.org/wpf"
         Style="{StaticResource MaterialDesignWindow}"
         mc:Ignorable="d"
         Title="MainView" Height="1000" Width="1600">
@@ -179,13 +180,9 @@
 
                     </StackPanel>
 
-                    <!--Graph Place -->
+                    
                     <Border Grid.Row="1" Margin="10" BorderThickness="1" BorderBrush="Gray">
-                        <TextBlock Text="Candlestick Chart Placeholder"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   FontSize="18"/>
-
+                        <oxy:PlotView  Model="{Binding CandlestickPlot}" />
                     </Border>
                 </Grid>
             </TabItem>
