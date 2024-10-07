@@ -239,6 +239,54 @@ namespace UI.ViewModel
         }
 
         #endregion
+
+        #region DetailedInfoCommands
+
+        private ICommand _goTotheCoinHomePageCommand;
+
+        public ICommand GoTotheCoinHomePageCommand
+        {
+            get
+            {
+                if (_goTotheCoinHomePageCommand == null)
+                {
+                    _goTotheCoinHomePageCommand = new RelayCommand(param =>
+                    {
+                        var url = DetailedInfoModel.HomePageLink;
+                        var sInfo = new System.Diagnostics.ProcessStartInfo(url)
+                        {
+                            UseShellExecute = true,
+                        };
+                        System.Diagnostics.Process.Start(sInfo);
+                    });
+                }
+                return _goTotheCoinHomePageCommand;
+            }
+        }
+
+        private ICommand _goTotheCoinRepoCommand;
+
+        public ICommand GoTotheCoinCoinRepoCommand
+        {
+            get
+            {
+                if (_goTotheCoinRepoCommand == null)
+                {
+                    _goTotheCoinRepoCommand = new RelayCommand(param =>
+                    {
+                        var url = DetailedInfoModel.RepositoryLink;
+                        var sInfo = new System.Diagnostics.ProcessStartInfo(url)
+                        {
+                            UseShellExecute = true,
+                        };
+                        System.Diagnostics.Process.Start(sInfo);
+                    });
+                }
+                return _goTotheCoinRepoCommand;
+            }
+        }
+
+        #endregion
         public MainViewModel()
         {
             IsDarkTheme = true;

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BLL.Deserializer;
+using BLL.Deserializer.Helper;
 using BLL.Manager.Helper;
 using BLL.Model;
 using DAL.ApiClients;
@@ -70,7 +71,11 @@ namespace BLL.Manager
                 return new AdditionalCoinInfoModel();
             }
 
-            return FetchAdditionalCoinInfo(id);
+            var Additionalinfo = FetchAdditionalCoinInfo(id);
+
+            Additionalinfo.Homepage = LinkCleaner.CleanLink(Additionalinfo.Homepage);
+            Additionalinfo.Repository = LinkCleaner.CleanLink(Additionalinfo.Repository);
+            return Additionalinfo;
         }
 
         #region Helpers

@@ -31,9 +31,10 @@ namespace BLL.Deserializer
 
             //Getting first homepage link
             var homepage = _helper.GetStringValue(jsonData["links"], "homepage")?.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
-
+            
             //Getting first link
             var repos = jsonData["links"]["repos_url"]["github"];
+           
             var firstRepository = repos?.FirstOrDefault()?.ToString();
 
             return new AdditionalCoinInfoModel(id, homepage, firstRepository);

@@ -142,10 +142,8 @@
                             <StackPanel>
                                 <TextBlock Text="Current Price:" FontWeight="Bold" />
                                 <TextBlock Text="{Binding DetailedInfoModel.CurrentPrice, StringFormat={}{0:C}}" Margin="0,0,0,10" FontWeight="Bold"/>
-
                                 <TextBlock Text="Market Cap:" FontWeight="Bold" />
                                 <TextBlock Text="{Binding DetailedInfoModel.MarketCap, StringFormat={}{0:N0}}" Margin="0,0,0,10" FontWeight="Bold"/>
-
                                 <TextBlock Text="Total Volume:" FontWeight="Bold" />
                                 <TextBlock Text="{Binding DetailedInfoModel.TotalVolume, StringFormat={}{0:N0}}" Margin="0,0,0,10" FontWeight="Bold"/>
                             </StackPanel>
@@ -153,18 +151,28 @@
                             <StackPanel>
                                 <TextBlock Text="Price Change (24h):" FontWeight="Bold" />
                                 <TextBlock Text="{Binding DetailedInfoModel.PriceChange24H, StringFormat={}{0:C}}" Margin="0,0,0,10" FontWeight="Bold"/>
-
                                 <TextBlock Text="Price Change Percentage (24h):" FontWeight="Bold" />
                                 <TextBlock Text="{Binding DetailedInfoModel.PriceChangePercentage24H, StringFormat={}{0:N2}%}" Margin="0,0,0,10" FontWeight="Bold"/>
-
                                 <TextBlock Text="Circulating Supply:" FontWeight="Bold" />
                                 <TextBlock Text="{Binding DetailedInfoModel.CirculatingSupply, StringFormat={}{0:N0}}" Margin="0,0,0,10" FontWeight="Bold"/>
-
                                 <TextBlock Text="Total Supply:" FontWeight="Bold" />
                                 <TextBlock Text="{Binding DetailedInfoModel.TotalSupply, StringFormat={}{0:N0}}" Margin="0,0,0,10" FontWeight="Bold"/>
-
                                 <TextBlock Text="Max Supply:" FontWeight="Bold" />
                                 <TextBlock Text="{Binding DetailedInfoModel.MaxSupply, StringFormat={}{0:N0}}" Margin="0,0,0,10" FontWeight="Bold"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Margin="5"
+                                        Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                        ToolTip="MaterialDesignFloatingActionMiniLightButton"
+                                        Command="{Binding GoTotheCoinHomePageCommand}">
+                                    <materialDesign:PackIcon Kind="Web"/>
+                                </Button>
+                                <Button Margin="5"
+                                        Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                        ToolTip="MaterialDesignFloatingActionMiniLightButton"
+                                        Command="{Binding GoTotheCoinCoinRepoCommand}">
+                                    <materialDesign:PackIcon Kind="Github"/>
+                                </Button>
                             </StackPanel>
                         </StackPanel>
 
