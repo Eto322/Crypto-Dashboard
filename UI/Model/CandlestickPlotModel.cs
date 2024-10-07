@@ -13,27 +13,34 @@ namespace UI.Model
    
      public static class  CandlestickPlotModel
     {
-        public static PlotModel CreateCandlestickPlotModel(List<CandleStickItemModel> candlestickItems)
+        public static PlotModel CreateCandlestickPlotModel(List<CandleStickItemModel> candlestickItems, bool isDarkTheme)
         {
             var plotModel = new PlotModel { Title = "Candlestick Chart" };
-            
+
+            if (isDarkTheme)
+            {
+               
+                plotModel.Background = OxyColor.FromArgb(255, 50, 50, 50); 
+                plotModel.TextColor = OxyColors.White; 
+            }
+            else
+            {
+                plotModel.Background = OxyColor.FromArgb(255, 255, 255, 255); 
+                plotModel.TextColor = OxyColors.Black; 
+            }
 
             var candlestickSeries = new CandleStickSeries
             {
-                Color = OxyColors.Black,
-                IncreasingColor = OxyColors.DarkGreen,
-                DecreasingColor = OxyColors.Red,
-                DataFieldX = "X",         
-                DataFieldHigh = "High",   
-                DataFieldLow = "Low",     
-                DataFieldOpen = "Open",   
-                DataFieldClose = "Close",  
+                DataFieldX = "X",
+                DataFieldHigh = "High",
+                DataFieldLow = "Low",
+                DataFieldOpen = "Open",
+                DataFieldClose = "Close",
                 TrackerFormatString = "High: {2:0.00}\nLow: {3:0.00}\nOpen: {4:0.00}\nClose: {5:0.00}",
                 ItemsSource = candlestickItems
             };
 
             plotModel.Series.Add(candlestickSeries);
-            var asd = plotModel.Series.Count();
             return plotModel;
         }
 

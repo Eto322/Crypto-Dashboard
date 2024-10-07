@@ -302,7 +302,7 @@ namespace UI.ViewModel
                 CandlestickItemsForDraw.Add(item);
             }
 
-            CandlestickPlot = CandlestickPlotModel.CreateCandlestickPlotModel(CandlestickItemsForDraw.ToList());
+            CandlestickPlot = CandlestickPlotModel.CreateCandlestickPlotModel(CandlestickItemsForDraw.ToList(),IsDarkTheme);
             Console.WriteLine();
         }
         
