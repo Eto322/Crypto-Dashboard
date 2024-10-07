@@ -51,7 +51,30 @@ namespace UI.Inf
             return cryptoCurrencyModel;
         }
 
-       
+        public UI.Model.ExchangeModel BllToUiConverter(BLL.Model.ExchangeModel exchangeBll)
+        {
+            return new UI.Model.ExchangeModel
+            {
+                Id = exchangeBll.Id,
+                Name = exchangeBll.Name,
+                CoinId = exchangeBll.CoinId,
+                Price = exchangeBll.Price ??0,
+                TradeUrl = exchangeBll.TradeUrl,
+                Image = exchangeBll.Image
+            };
+        }
+
+        public List<UI.Model.ExchangeModel> ConvertBllToUiExchanges(List<BLL.Model.ExchangeModel> exchangeBllList)
+        {
+            var exchangeModels = new List<UI.Model.ExchangeModel>();
+            foreach (var item in exchangeBllList)
+            {
+                exchangeModels.Add(BllToUiConverter(item));
+            }
+
+            return exchangeModels;
+        }
+
 
         public DetailedInfoModel CryptoConcurrenceToDetailedInfoModel(CryptoCurrencyModel cryptocurrency)
         {

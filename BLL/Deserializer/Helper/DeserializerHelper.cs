@@ -18,6 +18,16 @@ namespace BLL.Deserializer.Helper
             return null; 
         }
 
+        //Overloaded method for working with nested objects.
+        public string GetStringValue(JToken item, string parentKey, string childKey)
+        {
+            if (item[parentKey] != null && item[parentKey][childKey] != null)
+            {
+                return item[parentKey][childKey].ToString();
+            }
+            return null;
+        }
+
         public decimal? GetDecimalValue(JToken item, string key)
         {
             var valueStr = item[key]?.ToString();

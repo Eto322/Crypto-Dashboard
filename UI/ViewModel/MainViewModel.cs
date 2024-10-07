@@ -13,7 +13,6 @@ using BLL.Manager;
 using DAL.Credentials;
 using UI.Inf;
 using UI.Model;
-using BLL.Model;
 using OxyPlot;
 
 namespace UI.ViewModel
@@ -51,49 +50,49 @@ namespace UI.ViewModel
 
         #region TopCoinsCommandRegion
 
-        private ICommand _getDetailedInfo;
+        private ICommand _getDetailedInfoCommand;
 
-        public ICommand GetDetailedInfo
+        public ICommand GetDetailedInfoCommandCommand
         {
             get
             {
-                if (_getDetailedInfo == null)
+                if (_getDetailedInfoCommand == null)
                 {
-                    _getDetailedInfo = new RelayCommand(param =>
+                    _getDetailedInfoCommand = new RelayCommand(async param =>
                     {
                         SelectedIndex = 1;
-                        if (param!=null)
+                        if (param != null)
                         {
                             DetailedInfoModel = FindCurrrencyForDetailedView(param.ToString());
                             LoadCandlestickData(TopCurrencies.FirstOrDefault(c => c.IdGecko == param));
+                            ExchangeModels = await LoadMarketsForCoinAsync(param.ToString());//takes too loong so async
                         }
                         else
                         {
-                            MessageBox.Show("Cant find selected coin Gecko Api");
+                            MessageBox.Show("Can't find selected coin Gecko API");
                         }
-                        
                     });
                 }
 
-                return _getDetailedInfo;
+                return _getDetailedInfoCommand;
             }
         }
 
-        private ICommand _searchTopCoins;
+        private ICommand _searchTopCoinsCommand;
 
-        public ICommand SearchTopCoinsCommand
+        public ICommand SearchTopCoinsCommandCommand
         {
             get
             {
-                if (_searchTopCoins == null)
+                if (_searchTopCoinsCommand == null)
                 {
-                    _searchTopCoins = new RelayCommand(param =>
+                    _searchTopCoinsCommand = new RelayCommand(param =>
                     {
                         Task.Run(() => TopCurrencies = TopCoinsSearch());
                     });
                 }
 
-                return _searchTopCoins;
+                return _searchTopCoinsCommand;
             }
         }
 
@@ -284,6 +283,37 @@ namespace UI.ViewModel
             }
         }
 
+        private ObservableCollection<ExchangeModel> _exchangeModels;
+
+        public ObservableCollection<ExchangeModel> ExchangeModels
+        {
+            get => _exchangeModels;
+            set
+            {
+                _exchangeModels = value;
+                NotifyOfPropertyChanged();
+            }
+        }
+
+        #region MarketsHelper
+
+        private async Task<ObservableCollection<ExchangeModel>> LoadMarketsForCoinAsync(string id) //takes too loong so async
+        {
+            
+            var exchangeModels = await Task.Run(() =>
+            {
+                
+                var bllExchanges = _cryptoInfoManager.GetExchangeModels(id);
+                return new ObservableCollection<ExchangeModel>(
+                    _convertor.ConvertBllToUiExchanges(bllExchanges));
+            });
+
+            return exchangeModels;
+        }
+
+
+        #endregion
+
         #region CandlesstickHelper
 
         private void LoadCandlestickData(CryptoCurrencyModel model)
@@ -359,6 +389,29 @@ namespace UI.ViewModel
             }
         }
 
+        private ICommand _goToTheCoinExchangeCommand;
+
+        public ICommand GoTotTheCoinExchangeCommand
+        {
+            get
+            {
+                if (_goToTheCoinExchangeCommand == null)
+                {
+                    _goToTheCoinExchangeCommand = new RelayCommand(param =>
+                    {
+                        var url = param.ToString();
+                        var sInfo = new System.Diagnostics.ProcessStartInfo(url)
+                        {
+                            UseShellExecute = true,
+                        };
+                        System.Diagnostics.Process.Start(sInfo);
+                    });
+                }
+
+                return _goToTheCoinExchangeCommand;
+            }
+        }
+
         #endregion
         public MainViewModel()
         {
@@ -373,7 +426,6 @@ namespace UI.ViewModel
             CandlestickItemsForDraw = new ObservableCollection<CandleStickItemModel>();
 
             LoadCandlestickData(TopCurrencies[0]);
-
             Console.WriteLine();
            
         }

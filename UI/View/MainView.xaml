@@ -62,7 +62,7 @@
                                 Content="Search"
                                 Height="30"
                                 Margin="10,0,0,0"
-                                Command="{Binding SearchTopCoinsCommand}"/>
+                                Command="{Binding SearchTopCoinsCommandCommand}"/>
 
                     </Grid>
 
@@ -88,7 +88,7 @@
                                             Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                                             ToolTip="More info"
                                             CommandParameter="{Binding IdGecko}"
-                                            Command="{Binding DataContext.GetDetailedInfo,
+                                            Command="{Binding DataContext.GetDetailedInfoCommandCommand,
                                             RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}">
                                             <materialDesign:PackIcon Kind="Magnify"/>
                                         </Button>
@@ -129,7 +129,7 @@
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
 
@@ -171,13 +171,13 @@
                             <StackPanel Orientation="Horizontal">
                                 <Button Margin="5"
                                         Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                                        ToolTip="MaterialDesignFloatingActionMiniLightButton"
+                                        ToolTip="Go to the HomePage"
                                         Command="{Binding GoTotheCoinHomePageCommand}">
                                     <materialDesign:PackIcon Kind="Web"/>
                                 </Button>
                                 <Button Margin="5"
                                         Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                                        ToolTip="MaterialDesignFloatingActionMiniLightButton"
+                                        ToolTip="Go to the Coin Repo"
                                         Command="{Binding GoTotheCoinCoinRepoCommand}">
                                     <materialDesign:PackIcon Kind="Github"/>
                                 </Button>
@@ -188,22 +188,37 @@
 
                     <StackPanel Grid.Column="1" Margin="10" Grid.Row="0">
                         <TextBlock Text="Markets:" FontWeight="Bold" FontSize="18" Margin="0,0,0,5"/>
-                        <DataGrid ItemsSource="{Binding DetailedInfoModel.Markets}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,10">
+                        <DataGrid ItemsSource="{Binding ExchangeModels}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,10">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Market" Binding="{Binding MarketName}" Width="*"/>
-                                <DataGridTextColumn Header="Price" Binding="{Binding MarketPrice, StringFormat={}{0:C}}" Width="*"/>
+                                <DataGridTemplateColumn Header="Market" Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Source="{Binding Image}" Width="20" Height="20" Margin="0,0,5,0" />
+                                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="Price" Binding="{Binding Price, StringFormat={}{0:C}}" Width="*"/>
                                 <DataGridTemplateColumn Header="Actions" Width="120">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button Content="Go"
-                                                    Command="{Binding DataContext.GoToMarketPageCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
-                                                    CommandParameter="{Binding MarketUrl}" />
+                                            <Button
+                                                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                                ToolTip="More info"
+                                                CommandParameter="{Binding TradeUrl}"
+                                                Command="{Binding DataContext.GoTotTheCoinExchangeCommand,
+                                                RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}">
+                                                <materialDesign:PackIcon Kind="CartCheck"/>
+                                            </Button>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
+
 
 
                     <Border Grid.Row="1" Margin="10" BorderThickness="1" BorderBrush="Gray" Grid.Column="0" Grid.ColumnSpan="2">

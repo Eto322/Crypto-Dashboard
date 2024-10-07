@@ -33,6 +33,13 @@ namespace DAL.ApiClients
             
            
         }
+
+        public string GetMarketInfoOnCoin(string id, string coinId)
+        {
+            string url = $"https://api.coingecko.com/api/v3/exchanges/{id}/tickers?coin_ids={coinId}";
+            return GetResponse(url);
+        }
+        
         public string SearchCoins(string query)
         {
             string url = $"https://api.coingecko.com/api/v3/search?query={query}";
