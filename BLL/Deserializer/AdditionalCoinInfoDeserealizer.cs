@@ -23,15 +23,16 @@ namespace BLL.Deserializer
                 return null; 
             }
 
-            // Парсинг JSON ответа
+           //Parse Json data
             var jsonData = JObject.Parse(json);
-
-            // Извлечение id
+            
+           //Get Id
             var id = _helper.GetStringValue(jsonData, "id");
 
+            //Getting first homepage link
             var homepage = _helper.GetStringValue(jsonData["links"], "homepage")?.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
 
-            // Извлечение первой ссылки на репозиторий
+            //Getting first link
             var repos = jsonData["links"]["repos_url"]["github"];
             var firstRepository = repos?.FirstOrDefault()?.ToString();
 

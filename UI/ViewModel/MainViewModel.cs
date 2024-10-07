@@ -223,6 +223,22 @@ namespace UI.ViewModel
 
         #endregion
 
+        #region DetailedInfoRegion
+
+        private DetailedInfoModel _detailedInfoModel;
+
+        public DetailedInfoModel DetailedInfoModel
+        {
+            get => _detailedInfoModel ;
+
+            set
+            {
+                _detailedInfoModel = value;
+                NotifyOfPropertyChanged();
+            }
+        }
+
+        #endregion
         public MainViewModel()
         {
             IsDarkTheme = true;
@@ -231,8 +247,9 @@ namespace UI.ViewModel
             _convertor = new ModelConvertor();
 
             TopCurrencies = TopCoinsSearchByTop();
-            //var asd = _convertor.CryptoConcurrenceDetailedInfoModel(TopCurrencies[0]);
-            //Console.WriteLine();
+
+            DetailedInfoModel = _convertor.CryptoConcurrenceDetailedInfoModel(TopCurrencies[0]);
+           
         }
     }
 }

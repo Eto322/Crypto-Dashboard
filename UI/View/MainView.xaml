@@ -74,12 +74,12 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" />
                             <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                            <DataGridTextColumn Header="Current Price" Binding="{Binding CurrentPrice}" />
-                            <DataGridTextColumn Header="Market Cap" Binding="{Binding MarketCap}" />
-                            <DataGridTextColumn Header="24h Volume" Binding="{Binding TotalVolume}" />
-                            <DataGridTextColumn Header="Change (24h)" Binding="{Binding ChangePercent24Hr}" />
-                            <DataGridTextColumn Header="Circulating Supply" Binding="{Binding CirculatingSupply}" />
-                            <DataGridTextColumn Header="Last Updated" Binding="{Binding LastUpdated}" />
+                            <DataGridTextColumn Header="Current Price" Binding="{Binding CurrentPrice, StringFormat={}{0:N2}}" />
+                            <DataGridTextColumn Header="Market Cap" Binding="{Binding MarketCap, StringFormat={}{0:N0}}" />
+                            <DataGridTextColumn Header="24h Volume" Binding="{Binding TotalVolume, StringFormat={}{0:N0}}" />
+                            <DataGridTextColumn Header="Change (24h)" Binding="{Binding ChangePercent24Hr, StringFormat={}{0:N2}%}" />
+                            <DataGridTextColumn Header="Circulating Supply" Binding="{Binding CirculatingSupply, StringFormat={}{0:N0}}" />
+                            <DataGridTextColumn Header="Last Updated" Binding="{Binding LastUpdated, StringFormat={}{0:dd/MM/yyyy HH:mm}}" />
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -128,51 +128,46 @@
 
                     <StackPanel Orientation="Horizontal" Grid.Row="0">
                         <Image
-                            Source="{Binding Image}"
-                            Width="100"
-                            Height="100"
+                            Source="{Binding DetailedInfoModel.ImageUrl}"
+                            Width="400"
+                            Height="400"
                             Margin="10"
                             Stretch="Uniform" />
 
 
                         <StackPanel Margin="10">
-                            <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="25" />
-                            <TextBlock Text="{Binding Symbol}" FontStyle="Italic" FontSize="20" />
-                            <TextBlock Text="Current Price:" FontWeight="Bold" />
-                            <TextBlock Text="{Binding CurrentPrice, StringFormat={}{0:C}}" />
-                            <TextBlock Text="Market Cap:" FontWeight="Bold" />
-                            <TextBlock Text="{Binding MarketCap, StringFormat={}{0:C}}" />
-                            <TextBlock Text="Total Volume:" FontWeight="Bold" />
-                            <TextBlock Text="{Binding TotalVolume, StringFormat={}{0:C}}" />
-                            <TextBlock Text="Price Change (24h):" FontWeight="Bold" />
-                            <TextBlock Text="{Binding PriceChange24H, StringFormat={}{0:C}}" />
-                            <TextBlock Text="Price Change Percentage (24h):" FontWeight="Bold" />
-                            <TextBlock Text="{Binding PriceChangePercentage24H, StringFormat={}{0:P2}}" />
-                            <TextBlock Text="Circulating Supply:" FontWeight="Bold" />
-                            <TextBlock Text="{Binding CirculatingSupply}" />
-                            <TextBlock Text="Total Supply:" FontWeight="Bold" />
-                            <TextBlock Text="{Binding TotalSupply}" />
-                            <TextBlock Text="Max Supply:" FontWeight="Bold" />
-                            <TextBlock Text="{Binding MaxSupply}" />
-                            <StackPanel Orientation="Horizontal">
-                                <Button Margin="5"
-                                    Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                                    ToolTip="MaterialDesignFloatingActionMiniLightButton"
-                                >
-                                    <materialDesign:PackIcon
-                                        Kind="Web"/>
-                                </Button>
-                                <Button Margin="5"
-                                        Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                                        ToolTip="MaterialDesignFloatingActionMiniLightButton"
-                                >
-                                    <materialDesign:PackIcon
-                                        Kind="Github"/>
-                                </Button>
+                            <TextBlock Text="{Binding DetailedInfoModel.Name}" FontWeight="Bold" FontSize="25" />
+                            <TextBlock Text="{Binding DetailedInfoModel.Symbol}" FontStyle="Italic" FontSize="20" />
 
+                            <StackPanel>
+                                <TextBlock Text="Current Price:" FontWeight="Bold" />
+                                <TextBlock Text="{Binding DetailedInfoModel.CurrentPrice, StringFormat={}{0:C}}" Margin="0,0,0,10" FontWeight="Bold"/>
 
+                                <TextBlock Text="Market Cap:" FontWeight="Bold" />
+                                <TextBlock Text="{Binding DetailedInfoModel.MarketCap, StringFormat={}{0:N0}}" Margin="0,0,0,10" FontWeight="Bold"/>
+
+                                <TextBlock Text="Total Volume:" FontWeight="Bold" />
+                                <TextBlock Text="{Binding DetailedInfoModel.TotalVolume, StringFormat={}{0:N0}}" Margin="0,0,0,10" FontWeight="Bold"/>
+                            </StackPanel>
+
+                            <StackPanel>
+                                <TextBlock Text="Price Change (24h):" FontWeight="Bold" />
+                                <TextBlock Text="{Binding DetailedInfoModel.PriceChange24H, StringFormat={}{0:C}}" Margin="0,0,0,10" FontWeight="Bold"/>
+
+                                <TextBlock Text="Price Change Percentage (24h):" FontWeight="Bold" />
+                                <TextBlock Text="{Binding DetailedInfoModel.PriceChangePercentage24H, StringFormat={}{0:N2}%}" Margin="0,0,0,10" FontWeight="Bold"/>
+
+                                <TextBlock Text="Circulating Supply:" FontWeight="Bold" />
+                                <TextBlock Text="{Binding DetailedInfoModel.CirculatingSupply, StringFormat={}{0:N0}}" Margin="0,0,0,10" FontWeight="Bold"/>
+
+                                <TextBlock Text="Total Supply:" FontWeight="Bold" />
+                                <TextBlock Text="{Binding DetailedInfoModel.TotalSupply, StringFormat={}{0:N0}}" Margin="0,0,0,10" FontWeight="Bold"/>
+
+                                <TextBlock Text="Max Supply:" FontWeight="Bold" />
+                                <TextBlock Text="{Binding DetailedInfoModel.MaxSupply, StringFormat={}{0:N0}}" Margin="0,0,0,10" FontWeight="Bold"/>
                             </StackPanel>
                         </StackPanel>
+
                     </StackPanel>
 
                     <!--Graph Place -->
