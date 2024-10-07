@@ -206,7 +206,7 @@
                                         <DataTemplate>
                                             <Button
                                                 Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                                                ToolTip="More info"
+                                                ToolTip="Go To Market"
                                                 CommandParameter="{Binding TradeUrl}"
                                                 Command="{Binding DataContext.GoTotTheCoinExchangeCommand,
                                                 RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}">
@@ -246,7 +246,7 @@
                 <StackPanel Margin="10,0,0,0">
                     <!-- Toggle Dark/Light Theme -->
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <TextBlock Text="Light Theme:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <TextBlock Text="Theme:" VerticalAlignment="Center" Margin="0,0,10,0"/>
 
                         <ToggleButton
                             Content="{materialDesign:PackIcon Kind=SunMoonStars,Size=32}"
@@ -271,8 +271,6 @@
                                   Margin="10,0,0,0"/>
                     </StackPanel>
 
-                    <!-- Save Changes Button -->
-                    <Button Content="Save Settings" Margin="200,25,200,0"/>
                 </StackPanel>
 
 

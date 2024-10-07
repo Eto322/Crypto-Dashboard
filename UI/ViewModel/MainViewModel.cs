@@ -100,6 +100,23 @@ namespace UI.ViewModel
 
         #region SettingsRegion
 
+        private string _selectedLanguage;
+
+        public string SelectedLanguage
+        {
+            get => _selectedLanguage;
+
+            set
+            {
+                if (_selectedLanguage!=value)
+                {
+                    _selectedLanguage= value;
+                    ChangeLanguage(_selectedLanguage);
+                    NotifyOfPropertyChanged();
+                }
+            }
+        }
+        
         private int _selectedIndex;
 
         public int SelectedIndex
@@ -242,7 +259,11 @@ namespace UI.ViewModel
 
         #endregion
 
+        #region LanguageHelper
 
+       
+
+        #endregion
         #endregion
 
         #region DetailedInfoRegion
