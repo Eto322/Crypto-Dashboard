@@ -8,6 +8,7 @@ using BLL.Manager.Helper;
 using UI.Model;
 using BLL.Model;
 using DAL.Credentials;
+using OxyPlot.Axes;
 
 namespace UI.Inf
 {
@@ -83,7 +84,7 @@ namespace UI.Inf
             {
                 items.Add(new CandleStickItemModel()
                 {
-                    X = model.Timestamp.Value,
+                    X = DateTimeAxis.ToDouble(new DateTime(1970, 1, 1).AddMilliseconds(model.Timestamp.Value)),
                     Open = (double)model.Open.Value,
                     High = (double)model.High.Value,
                     Low = (double)model.Low.Value,

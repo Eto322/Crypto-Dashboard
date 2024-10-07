@@ -29,6 +29,17 @@ namespace UI.Model
                 plotModel.TextColor = OxyColors.Black; 
             }
 
+            plotModel.Axes.Add(new DateTimeAxis
+            {
+                Position = AxisPosition.Bottom,
+                StringFormat = "yyyy-MM-dd HH:mm",
+                IntervalType = DateTimeIntervalType.Minutes,
+                MajorGridlineStyle = LineStyle.Solid,
+                MinorGridlineStyle = LineStyle.Dot,
+                IntervalLength = 60, 
+                Angle = 45, 
+            });
+
             var candlestickSeries = new CandleStickSeries
             {
                 DataFieldX = "X",
