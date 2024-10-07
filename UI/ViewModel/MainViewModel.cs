@@ -60,6 +60,15 @@ namespace UI.ViewModel
                     _getDetailedInfo = new RelayCommand(param =>
                     {
                         SelectedIndex = 1;
+                        if (param!=null)
+                        {
+                            DetailedInfoModel = FindCurrrencyForDetailedView(param.ToString());
+                        }
+                        else
+                        {
+                            MessageBox.Show("Cant find selected coin Gecko Api");
+                        }
+                        
                     });
                 }
 
@@ -167,6 +176,17 @@ namespace UI.ViewModel
 
         #region SearchHelpers
 
+        public DetailedInfoModel FindCurrrencyForDetailedView (string id)
+        {
+            var currency = TopCurrencies.FirstOrDefault(c => c.IdGecko == id);
+            if (currency==null)
+            {
+                MessageBox.Show("Cant find selected coin Gecko Api");
+                return null;
+            }
+
+            return _convertor.CryptoConcurrenceToDetailedInfoModel(currency);
+        }
         
         public ObservableCollection<CryptoCurrencyModel> TopCoinsSearch()
         {
@@ -296,7 +316,7 @@ namespace UI.ViewModel
 
             TopCurrencies = TopCoinsSearchByTop();
 
-            DetailedInfoModel = _convertor.CryptoConcurrenceDetailedInfoModel(TopCurrencies[0]);
+            DetailedInfoModel = _convertor.CryptoConcurrenceToDetailedInfoModel(TopCurrencies[0]);
            
         }
     }

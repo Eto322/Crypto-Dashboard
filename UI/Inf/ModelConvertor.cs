@@ -50,7 +50,7 @@ namespace UI.Inf
             return cryptoCurrencyModel;
         }
 
-        public DetailedInfoModel CryptoConcurrenceDetailedInfoModel(CryptoCurrencyModel cryptocurrency)
+        public DetailedInfoModel CryptoConcurrenceToDetailedInfoModel(CryptoCurrencyModel cryptocurrency)
         {
             var AdditionalInfo = GetAdditionalCoinInfo(cryptocurrency.IdGecko);
             

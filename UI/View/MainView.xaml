@@ -86,6 +86,7 @@
                                         <Button
                                             Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                                             ToolTip="More info"
+                                            CommandParameter="{Binding IdGecko}"
                                             Command="{Binding DataContext.GetDetailedInfo,
                                             RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}">
                                             <materialDesign:PackIcon Kind="Magnify"/>

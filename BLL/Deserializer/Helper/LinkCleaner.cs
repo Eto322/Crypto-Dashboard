@@ -11,7 +11,10 @@ namespace BLL.Deserializer.Helper
     {
         public static string CleanLink(string input)
         {
-
+            if (input==null)
+            {
+                return string.Empty;
+            }
             string cleaned = input.Trim().Replace("\r", "").Replace("\n", "").Replace("\"", "");
 
 
