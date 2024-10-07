@@ -65,6 +65,7 @@ namespace UI.ViewModel
                         if (param!=null)
                         {
                             DetailedInfoModel = FindCurrrencyForDetailedView(param.ToString());
+                            LoadCandlestickData(TopCurrencies.FirstOrDefault(c => c.IdGecko == param));
                         }
                         else
                         {
