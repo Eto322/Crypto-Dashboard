@@ -1,0 +1,42 @@
+[
+  {
+    "id": "bybit",
+    "name": "Bybit (Futures)"
+  },
+  {
+    "id": "okex",
+    "name": "OKX"
+  },
+  {
+    "id": "gdax",
+    "name": "Coinbase Exchange"
+  },
+  {
+    "id": "kraken",
+    "name": "Kraken"
+  },
+  {
+    "id": "kucoin",
+    "name": "KuCoin"
+  },
+  {
+    "id": "binance_us",
+    "name": "Binance US"
+  },
+  {
+    "id": "backpack_exchange",
+    "name": "Backpack Exchange"
+  },
+  {
+    "id": "binance",
+    "name": "Binance"
+  },
+  {
+    "id": "bitget",
+    "name": "Bitget"
+  },
+  {
+    "id": "gate",
+    "name": "Gate.io"
+  }
+]

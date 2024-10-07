@@ -22,5 +22,6 @@
         public string Image { get; set; } //  CoinGecko
         public string Explorer { get; set; } //  CoinCap
         public string LastUpdated { get; set; } //  CoinGecko
-    }
+
+            }
 }

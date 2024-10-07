@@ -373,7 +373,7 @@ namespace UI.ViewModel
             CandlestickItemsForDraw = new ObservableCollection<CandleStickItemModel>();
 
             LoadCandlestickData(TopCurrencies[0]);
-            
+
             Console.WriteLine();
            
         }

@@ -11,6 +11,7 @@ namespace BLL.Manager.Helper
         public string Id { get; set; }
         public string Homepage { get; set; }
         public string Repository { get; set; }
+        
 
         public AdditionalCoinInfoModel(string id, string homepage, string repository)
         {

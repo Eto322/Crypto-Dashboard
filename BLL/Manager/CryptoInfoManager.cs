@@ -21,6 +21,7 @@ namespace BLL.Manager
         private readonly CryptocurrencyDeserializer _cryptocurrencyDeserializer;
         private readonly AdditionalCoinInfoDeserializer _additionalCoinInfoDeserializer;
         private readonly CandlesDeserializer _candlesDeserializer;
+        
         public CryptoInfoManager(CredentialManager credentialManager)
         {
             _credentialManager = credentialManager;
@@ -90,6 +91,15 @@ namespace BLL.Manager
             return FetchCandlestickModels(id, days);
         }
 
+        public List<ExchangeModel> GetExchanges()
+        {
+            if (!_credentialManager.IsCoinGeckoApiKeyExist)
+            {
+                throw new Exception("CoinGecko API key is not set");
+            }
+
+            return ExchangeDataLoader.LoadExchangeModels();
+        }
         #region Helpers
 
         private AdditionalCoinInfoModel FetchAdditionalCoinInfo (string id)
