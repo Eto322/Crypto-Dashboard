@@ -261,7 +261,32 @@ namespace UI.ViewModel
 
         #region LanguageHelper
 
-       
+        public void ChangeLanguage(string language)
+        {
+            ResourceDictionary dictionary = new ResourceDictionary();
+            switch (language)
+            {
+                case "uk":
+                    dictionary.Source = new Uri("pack://application:,,,/UI;component/Resource/strings.uk.xaml");
+                    break;
+                case "en":
+                    dictionary.Source = new Uri("pack://application:,,,/UI;component/Resource/strings.en.xaml");
+                    break;
+            }
+
+            var existingDictionary = Application.Current.Resources.MergedDictionaries
+                .FirstOrDefault(d => d.Source != null && d.Source.OriginalString.Contains("strings."));
+
+            if (existingDictionary != null)
+            {
+                Application.Current.Resources.MergedDictionaries.Remove(existingDictionary);
+            }
+
+            
+            Application.Current.Resources.MergedDictionaries.Add(dictionary);
+        }
+
+
 
         #endregion
         #endregion
@@ -447,6 +472,7 @@ namespace UI.ViewModel
             CandlestickItemsForDraw = new ObservableCollection<CandleStickItemModel>();
 
             LoadCandlestickData(TopCurrencies[0]);
+            
             Console.WriteLine();
            
         }

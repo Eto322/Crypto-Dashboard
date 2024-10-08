@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:System="clr-namespace:System;assembly=mscorlib">
+    <System:String x:Key="TopCoins">Топ Монет</System:String>
+    <System:String x:Key="CoinInfo">Детально</System:String>
+    <System:String x:Key="Markets">Ринки:</System:String>
+    <System:String x:Key="Settings">Налаштування</System:String>
+    <System:String x:Key="Search">Пошук</System:String>
+    <System:String x:Key="Symbol">Символ</System:String>
+    <System:String x:Key="Name">Назва</System:String>
+    <System:String x:Key="CurrentPrice">Поточна ціна</System:String>
+    <System:String x:Key="MarketCap">Капіталізація</System:String>
+    <System:String x:Key="24hVolume">Обсяг за 24 години</System:String>
+    <System:String x:Key="Change(24h)">Зміна (за 24 години)</System:String>
+    <System:String x:Key="CirculatingSupply">Циркулююча пропозиція</System:String>
+    <System:String x:Key="LastUpdated">Останнє оновлення</System:String>
+    <System:String x:Key="Market">Ринок</System:String>
+    <System:String x:Key="Price">Ціна</System:String>
+    <System:String x:Key="CurrentPrice:">Поточна ціна:</System:String>
+    <System:String x:Key="MarketCap:">Капіталізація:</System:String>
+    <System:String x:Key="TotalVolume:">Загальний обсяг:</System:String>
+    <System:String x:Key="PriceChange (24h):">Зміна ціни (за 24 години):</System:String>
+    <System:String x:Key="PriceChangePercentage(24h):">Відсоток зміни ціни (за 24 години):</System:String>
+    <System:String x:Key="CirculatingSupply:">Циркулююча пропозиція:</System:String>
+    <System:String x:Key="TotalSupply:">Загальна пропозиція:</System:String>
+    <System:String x:Key="MaxSupply:">Максимальна пропозиція:</System:String>
+    <System:String x:Key="Moreinfo">Більше інформації</System:String>
+    <System:String x:Key="GototheHomePage">Перейти на домашню сторінку</System:String>
+    <System:String x:Key="GototheCoin Repo">Перейти до репозиторію монети</System:String>
+    <System:String x:Key="ToggleDark/LightTheme">Переключити темну/світлу тему</System:String>
+    <System:String x:Key="Theme:">Тема:</System:String>
+    <System:String x:Key="Language:">Мова:</System:String>
+    <System:String x:Key="NumberOfTopCurrencies :">Кількість топових валют:</System:String>
+    <System:String x:Key="GoToMarket">Перейти на біржу</System:String>
+</ResourceDictionary>

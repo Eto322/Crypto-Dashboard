@@ -9,17 +9,13 @@
         xmlns:oxy="http://oxyplot.org/wpf"
         Style="{StaticResource MaterialDesignWindow}"
         mc:Ignorable="d"
-        Title="MainView" Height="1000" Width="1600">
-
+        Title="{DynamicResource MainViewTitle}" Height="1000" Width="1200">
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
-
     <Grid>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-
         </Grid.RowDefinitions>
         <TabControl
             materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
@@ -27,69 +23,36 @@
             Style="{StaticResource MaterialDesignNavigationRailTabControl}"
             TabStripPlacement="Left"
             SelectedIndex="{Binding SelectedIndex}">
-            <TabItem>
+            <TabItem Width="100">
                 <TabItem.Header>
-                    <StackPanel
-                        Width="auto"
-                        Height="auto">
-                        <materialDesign:PackIcon
-                            Width="24"
-                            Height="24"
-                            HorizontalAlignment="Center"
-                            Kind="Bitcoin" />
-                        <TextBlock
-                            HorizontalAlignment="Center"
-                            Text="Top Coins" />
+                    <StackPanel Width="auto" Height="auto">
+                        <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="Bitcoin" />
+                        <TextBlock HorizontalAlignment="Center" Text="{DynamicResource TopCoins}" />
                     </StackPanel>
                 </TabItem.Header>
-
-
                 <StackPanel Orientation="Vertical">
-
                     <Grid HorizontalAlignment="Stretch" Margin="10">
-
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-
-                        <TextBox Grid.Column="0"
-                                 Height="30"
-                                 VerticalAlignment="Center"
-                                 Text="{Binding TopCoinsSearchBar}" />
-
-                        <Button Grid.Column="1"
-                                Content="Search"
-                                Height="30"
-                                Margin="10,0,0,0"
-                                Command="{Binding SearchTopCoinsCommandCommand}"/>
-
+                        <TextBox Grid.Column="0" Height="30" VerticalAlignment="Center" Text="{Binding TopCoinsSearchBar}" />
+                        <Button Grid.Column="1" Content="{DynamicResource Search}" Height="30" Margin="10,0,0,0" Command="{Binding SearchTopCoinsCommandCommand}"/>
                     </Grid>
-
-                    <DataGrid
-                        AutoGenerateColumns="False"
-                        Margin="0"
-                        CanUserResizeColumns="True"
-                        ItemsSource="{Binding TopCurrencies}"
-                        IsReadOnly="True">
+                    <DataGrid AutoGenerateColumns="False" Margin="0" CanUserResizeColumns="True" ItemsSource="{Binding TopCurrencies}" IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" />
-                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                            <DataGridTextColumn Header="Current Price" Binding="{Binding CurrentPrice, StringFormat={}{0:N2}}" />
-                            <DataGridTextColumn Header="Market Cap" Binding="{Binding MarketCap, StringFormat={}{0:N0}}" />
-                            <DataGridTextColumn Header="24h Volume" Binding="{Binding TotalVolume, StringFormat={}{0:N0}}" />
-                            <DataGridTextColumn Header="Change (24h)" Binding="{Binding ChangePercent24Hr, StringFormat={}{0:N2}%}" />
-                            <DataGridTextColumn Header="Circulating Supply" Binding="{Binding CirculatingSupply, StringFormat={}{0:N0}}" />
-                            <DataGridTextColumn Header="Last Updated" Binding="{Binding LastUpdated, StringFormat={}{0:dd/MM/yyyy HH:mm}}" />
+                            <DataGridTextColumn Header="{DynamicResource Symbol}" Binding="{Binding Symbol}" />
+                            <DataGridTextColumn Header="{DynamicResource Name}" Binding="{Binding Name}" />
+                            <DataGridTextColumn Header="{DynamicResource CurrentPrice}" Binding="{Binding CurrentPrice, StringFormat={}{0:N2}}" />
+                            <DataGridTextColumn Header="{DynamicResource MarketCap}" Binding="{Binding MarketCap, StringFormat={}{0:N0}}" />
+                            <DataGridTextColumn Header="{DynamicResource 24hVolume}" Binding="{Binding TotalVolume, StringFormat={}{0:N0}}" />
+                            <DataGridTextColumn Header="{DynamicResource Change(24h)}" Binding="{Binding ChangePercent24Hr, StringFormat={}{0:N2}%}" />
+                            <DataGridTextColumn Header="{DynamicResource CirculatingSupply}" Binding="{Binding CirculatingSupply, StringFormat={}{0:N0}}" />
+                            <DataGridTextColumn Header="{DynamicResource LastUpdated}" Binding="{Binding LastUpdated, StringFormat={}{0:dd/MM/yyyy HH:mm}}" />
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button
-                                            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                                            ToolTip="More info"
-                                            CommandParameter="{Binding IdGecko}"
-                                            Command="{Binding DataContext.GetDetailedInfoCommandCommand,
-                                            RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}">
+                                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="{DynamicResource Moreinfo}" CommandParameter="{Binding IdGecko}" Command="{Binding DataContext.GetDetailedInfoCommandCommand, RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}">
                                             <materialDesign:PackIcon Kind="Magnify"/>
                                         </Button>
                                     </DataTemplate>
@@ -97,100 +60,64 @@
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-
-
                 </StackPanel>
-
-
-
             </TabItem>
-
             <TabItem>
                 <TabItem.Header>
-                    <StackPanel
-                        Width="auto"
-                        Height="auto">
-                        <materialDesign:PackIcon
-                            Width="24"
-                            Height="24"
-                            HorizontalAlignment="Center"
-                            Kind="Coins" />
-                        <TextBlock
-                            HorizontalAlignment="Center"
-                            Text="Coin Info" />
+                    <StackPanel Width="auto" Height="auto">
+                        <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="Coins" />
+                        <TextBlock HorizontalAlignment="Center" Text="{DynamicResource CoinInfo}" />
                     </StackPanel>
                 </TabItem.Header>
-
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-
-
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
-                        <Image
-                            Source="{Binding DetailedInfoModel.ImageUrl}"
-                            Width="400"
-                            Height="400"
-                            Margin="10"
-                            Stretch="Uniform" />
-
-
-                        <StackPanel Margin="10" >
+                        <Image Source="{Binding DetailedInfoModel.ImageUrl}" Width="400" Height="400" Margin="10" Stretch="Uniform" />
+                        <StackPanel Margin="10">
                             <TextBlock Text="{Binding DetailedInfoModel.Name}" FontWeight="Bold" FontSize="25" />
                             <TextBlock Text="{Binding DetailedInfoModel.Symbol}" FontStyle="Italic" FontSize="20" />
-
                             <StackPanel>
-                                <TextBlock Text="Current Price:" FontWeight="Bold" />
+                                <TextBlock Text="{DynamicResource CurrentPrice:}" FontWeight="Bold" />
                                 <TextBlock Text="{Binding DetailedInfoModel.CurrentPrice, StringFormat={}{0:C}}" Margin="0,0,0,10" FontWeight="Bold"/>
-                                <TextBlock Text="Market Cap:" FontWeight="Bold" />
+                                <TextBlock Text="{DynamicResource MarketCap:}" FontWeight="Bold" />
                                 <TextBlock Text="{Binding DetailedInfoModel.MarketCap, StringFormat={}{0:N0}}" Margin="0,0,0,10" FontWeight="Bold"/>
-                                <TextBlock Text="Total Volume:" FontWeight="Bold" />
+                                <TextBlock Text="{DynamicResource TotalVolume:}" FontWeight="Bold" />
                                 <TextBlock Text="{Binding DetailedInfoModel.TotalVolume, StringFormat={}{0:N0}}" Margin="0,0,0,10" FontWeight="Bold"/>
                             </StackPanel>
-
                             <StackPanel>
-                                <TextBlock Text="Price Change (24h):" FontWeight="Bold" />
+                                <TextBlock Text="{DynamicResource PriceChange (24h):}" FontWeight="Bold" />
                                 <TextBlock Text="{Binding DetailedInfoModel.PriceChange24H, StringFormat={}{0:C}}" Margin="0,0,0,10" FontWeight="Bold"/>
-                                <TextBlock Text="Price Change Percentage (24h):" FontWeight="Bold" />
+                                <TextBlock Text="{DynamicResource PriceChangePercentage(24h):}" FontWeight="Bold" />
                                 <TextBlock Text="{Binding DetailedInfoModel.PriceChangePercentage24H, StringFormat={}{0:N2}%}" Margin="0,0,0,10" FontWeight="Bold"/>
-                                <TextBlock Text="Circulating Supply:" FontWeight="Bold" />
+                                <TextBlock Text="{DynamicResource CirculatingSupply:}" FontWeight="Bold" />
                                 <TextBlock Text="{Binding DetailedInfoModel.CirculatingSupply, StringFormat={}{0:N0}}" Margin="0,0,0,10" FontWeight="Bold"/>
-                                <TextBlock Text="Total Supply:" FontWeight="Bold" />
+                                <TextBlock Text="{DynamicResource TotalSupply:}" FontWeight="Bold" />
                                 <TextBlock Text="{Binding DetailedInfoModel.TotalSupply, StringFormat={}{0:N0}}" Margin="0,0,0,10" FontWeight="Bold"/>
-                                <TextBlock Text="Max Supply:" FontWeight="Bold" />
+                                <TextBlock Text="{DynamicResource MaxSupply:}" FontWeight="Bold" />
                                 <TextBlock Text="{Binding DetailedInfoModel.MaxSupply, StringFormat={}{0:N0}}" Margin="0,0,0,10" FontWeight="Bold"/>
                             </StackPanel>
-
                             <StackPanel Orientation="Horizontal">
-                                <Button Margin="5"
-                                        Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                                        ToolTip="Go to the HomePage"
-                                        Command="{Binding GoTotheCoinHomePageCommand}">
+                                <Button Margin="5" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="{DynamicResource GototheHomePage}" Command="{Binding GoTotheCoinHomePageCommand}">
                                     <materialDesign:PackIcon Kind="Web"/>
                                 </Button>
-                                <Button Margin="5"
-                                        Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                                        ToolTip="Go to the Coin Repo"
-                                        Command="{Binding GoTotheCoinCoinRepoCommand}">
+                                <Button Margin="5" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="{DynamicResource GototheCoin Repo}" Command="{Binding GoTotheCoinCoinRepoCommand}">
                                     <materialDesign:PackIcon Kind="Github"/>
                                 </Button>
                             </StackPanel>
                         </StackPanel>
-
                     </StackPanel>
-
                     <StackPanel Grid.Column="1" Margin="10" Grid.Row="0">
-                        <TextBlock Text="Markets:" FontWeight="Bold" FontSize="18" Margin="0,0,0,5"/>
+                        <TextBlock Text="{DynamicResource Markets}" FontWeight="Bold" FontSize="18" Margin="0,0,0,5"/>
                         <DataGrid ItemsSource="{Binding ExchangeModels}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,10">
                             <DataGrid.Columns>
-                                <DataGridTemplateColumn Header="Market" Width="*">
+                                <DataGridTemplateColumn Header="{DynamicResource Market}" Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
@@ -200,16 +127,11 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTextColumn Header="Price" Binding="{Binding Price, StringFormat={}{0:C}}" Width="*"/>
-                                <DataGridTemplateColumn Header="Actions" Width="120">
+                                <DataGridTextColumn Header="{DynamicResource Price}" Binding="{Binding Price, StringFormat={}{0:C}}" Width="*"/>
+                                <DataGridTemplateColumn Header="{DynamicResource GoToMarket}" Width="120">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button
-                                                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                                                ToolTip="Go To Market"
-                                                CommandParameter="{Binding TradeUrl}"
-                                                Command="{Binding DataContext.GoTotTheCoinExchangeCommand,
-                                                RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}">
+                                            <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="{DynamicResource GoToMarket}" CommandParameter="{Binding TradeUrl}" Command="{Binding DataContext.GoTotTheCoinExchangeCommand, RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}">
                                                 <materialDesign:PackIcon Kind="CartCheck"/>
                                             </Button>
                                         </DataTemplate>
@@ -218,64 +140,44 @@
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
-
-
-
                     <Border Grid.Row="1" Margin="10" BorderThickness="1" BorderBrush="Gray" Grid.Column="0" Grid.ColumnSpan="2">
-                        <oxy:PlotView  Model="{Binding CandlestickPlot}" />
+                        <oxy:PlotView Model="{Binding CandlestickPlot}" />
                     </Border>
                 </Grid>
             </TabItem>
-
             <TabItem>
                 <TabItem.Header>
-                    <StackPanel
-                        Width="auto"
-                        Height="auto">
-                        <materialDesign:PackIcon
-                            Width="24"
-                            Height="24"
-                            HorizontalAlignment="Center"
-                            Kind="Settings" />
-                        <TextBlock
-                            HorizontalAlignment="Center"
-                            Text="Settings" />
+                    <StackPanel Width="auto" Height="auto">
+                        <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="Settings" />
+                        <TextBlock HorizontalAlignment="Center" Text="{DynamicResource Settings}" />
                     </StackPanel>
                 </TabItem.Header>
-
                 <StackPanel Margin="10,0,0,0">
                     <!-- Toggle Dark/Light Theme -->
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <TextBlock Text="Theme:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-
-                        <ToggleButton
-                            Content="{materialDesign:PackIcon Kind=SunMoonStars,Size=32}"
-                            IsChecked="{Binding IsDarkTheme, Mode=TwoWay}"
-                            Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
-                            ToolTip="Toggle Dark/Light Theme"/>
+                        <TextBlock Text="{DynamicResource Theme:}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <ToggleButton Content="{materialDesign:PackIcon Kind=SunMoonStars,Size=32}" IsChecked="{Binding IsDarkTheme, Mode=TwoWay}" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" ToolTip="{DynamicResource ToggleDark/LightTheme}"/>
                     </StackPanel>
-
                     <!-- Language Changer  -->
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <TextBlock Text="Language:" VerticalAlignment="Center" />
-                        <ComboBox Width="150"
-                                  Margin="10,0,0,0"/>
+                        <TextBlock Text="{DynamicResource Language:}" VerticalAlignment="Center" />
+                        <ComboBox Width="150" Margin="10,0,0,0" 
+                                  SelectedValue="{Binding SelectedLanguage}" 
+                                  SelectedValuePath="Tag">
+                            <ComboBoxItem Content="English" Tag="en"/>
+                            <ComboBoxItem Content="Українська" Tag="uk"/>
+                        </ComboBox>
                     </StackPanel>
+
+
 
                     <!-- Top N Currency -->
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <TextBlock Text="Number Of Top Currencies :" VerticalAlignment="Center" />
-                        <ComboBox Width="150"
-                                  ItemsSource="{Binding TopCurrenciesOptions}"
-                                  SelectedItem="{Binding SelectedNumberOfTopCurrencies}"
-                                  Margin="10,0,0,0"/>
+                        <TextBlock Text="{DynamicResource NumberOfTopCurrencies :}" VerticalAlignment="Center" />
+                        <ComboBox Width="150" ItemsSource="{Binding TopCurrenciesOptions}" SelectedItem="{Binding SelectedNumberOfTopCurrencies}" Margin="10,0,0,0"/>
                     </StackPanel>
-
                 </StackPanel>
-
-
             </TabItem>
-
         </TabControl>
     </Grid>
 </Window>
