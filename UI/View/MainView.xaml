@@ -104,10 +104,12 @@
                                 <TextBlock Text="{Binding DetailedInfoModel.MaxSupply, StringFormat={}{0:N0}}" Margin="0,0,0,10" FontWeight="Bold"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <Button Margin="5" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="{DynamicResource GototheHomePage}" Command="{Binding GoTotheCoinHomePageCommand}">
+                                <Button IsEnabled="{Binding DetailedInfoModel.IsHomePageLinkAvailable}"
+                                        Margin="5" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="{DynamicResource GototheHomePage}" Command="{Binding GoTotheCoinHomePageCommand}">
                                     <materialDesign:PackIcon Kind="Web"/>
                                 </Button>
-                                <Button Margin="5" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="{DynamicResource GototheCoin Repo}" Command="{Binding GoTotheCoinCoinRepoCommand}">
+                                <Button  IsEnabled="{Binding DetailedInfoModel.IsRepositoryLinkAvailable}"
+                                         Margin="5" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="{DynamicResource GototheCoin Repo}" Command="{Binding GoTotheCoinCoinRepoCommand}">
                                     <materialDesign:PackIcon Kind="Github"/>
                                 </Button>
                             </StackPanel>
@@ -131,7 +133,9 @@
                                 <DataGridTemplateColumn Header="{DynamicResource GoToMarket}" Width="120">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="{DynamicResource GoToMarket}" CommandParameter="{Binding TradeUrl}" Command="{Binding DataContext.GoTotTheCoinExchangeCommand, RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}">
+                                            <Button  IsEnabled="{Binding IsTradeUrlAvailable}"
+                                                     Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="{DynamicResource GoToMarket}" CommandParameter="{Binding TradeUrl}" 
+                                                     Command="{Binding DataContext.GoTotTheCoinExchangeCommand, RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}">
                                                 <materialDesign:PackIcon Kind="CartCheck"/>
                                             </Button>
                                         </DataTemplate>

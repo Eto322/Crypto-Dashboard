@@ -445,6 +445,7 @@ namespace UI.ViewModel
                 {
                     _goToTheCoinExchangeCommand = new RelayCommand(param =>
                     {
+
                         var url = param.ToString();
                         var sInfo = new System.Diagnostics.ProcessStartInfo(url)
                         {

@@ -53,6 +53,6 @@ namespace UI.Model
             set { _image = value; NotifyOfPropertyChanged(); }
         }
 
-
+        public bool IsTradeUrlAvailable => !string.IsNullOrEmpty(TradeUrl);
     }
 }

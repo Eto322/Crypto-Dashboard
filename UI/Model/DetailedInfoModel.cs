@@ -110,6 +110,9 @@ namespace UI.Model
             set { _repositoryLink = value; NotifyOfPropertyChanged(); }
         }
 
-      
+        public bool IsHomePageLinkAvailable => !string.IsNullOrEmpty(HomePageLink);
+
+        public bool IsRepositoryLinkAvailable => !string.IsNullOrEmpty(RepositoryLink);
     }
+}
 }
