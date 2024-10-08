@@ -16,7 +16,7 @@ namespace DAL.Credentials
         public CredentialManager()
         {
             // Get the path to the project's root directory
-            string basePath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
+            string basePath = AppContext.BaseDirectory;
 
             // Create a configuration builder and specify the path to the configuration file
             var builder = new ConfigurationBuilder()
