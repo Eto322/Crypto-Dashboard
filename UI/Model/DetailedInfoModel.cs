@@ -115,4 +115,4 @@ namespace UI.Model
         public bool IsRepositoryLinkAvailable => !string.IsNullOrEmpty(RepositoryLink);
     }
 }
-}
+

@@ -465,12 +465,10 @@ namespace UI.ViewModel
             IsDarkTheme = true;
             SelectedNumberOfTopCurrencies = TopCurrenciesOptions[1];
             _cryptoInfoManager = new CryptoInfoManager(new CredentialManager());
-            
-
             TopCurrencies = TopCoinsSearchByTop();
-
             DetailedInfoModel = ModelConvertor.CryptoConcurrenceToDetailedInfoModel(TopCurrencies[0]);
             CandlestickItemsForDraw = new ObservableCollection<CandleStickItemModel>();
+            SelectedLanguage = "en";
 
             LoadCandlestickData(TopCurrencies[0]);
             
