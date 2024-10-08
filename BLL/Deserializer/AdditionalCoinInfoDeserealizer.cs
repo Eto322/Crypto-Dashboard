@@ -12,11 +12,10 @@ namespace BLL.Deserializer
 {
     public class AdditionalCoinInfoDeserializer
     {
-        private DeserializerHelper _helper;
+        
         
         public AdditionalCoinInfoModel Deserializer ( string json)
         {
-            _helper = new DeserializerHelper();
             
             if (string.IsNullOrEmpty(json))
             {
@@ -27,10 +26,10 @@ namespace BLL.Deserializer
             var jsonData = JObject.Parse(json);
             
            //Get Id
-            var id = _helper.GetStringValue(jsonData, "id");
+            var id = DeserializerHelper.GetStringValue(jsonData, "id");
 
             //Getting first homepage link
-            var homepage = _helper.GetStringValue(jsonData["links"], "homepage")?.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
+            var homepage = DeserializerHelper.GetStringValue(jsonData["links"], "homepage")?.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
             
             //Getting first link
             var repos = jsonData["links"]["repos_url"]["github"];

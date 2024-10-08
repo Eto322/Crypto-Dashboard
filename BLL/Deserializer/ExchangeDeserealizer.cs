@@ -12,7 +12,7 @@ namespace BLL.Deserializer
 {
     public class ExchangeDeserializer
     {
-        private DeserializerHelper _helper;
+        
         public List<ExchangeModel> Deserialize(string json)
         {
             var exchanges = JsonConvert.DeserializeObject<List<ExchangeModel>>(json);
@@ -33,18 +33,18 @@ namespace BLL.Deserializer
 
         private ExchangeModel ConvertToExchangeModel(JToken data,string coinId)
         {
-            _helper=new DeserializerHelper();
+           
             var tickers = data["tickers"];
             if (tickers != null && tickers.Any())
             {
                 var item = tickers.First();
                 return new ExchangeModel
                 {
-                    Id = _helper.GetStringValue(item, "market", "identifier"),
-                    Name = _helper.GetStringValue(item, "market", "name"),
-                    Price = _helper.GetDecimalValue(item, "last"),
-                    TradeUrl = _helper.GetStringValue(item, "trade_url"),
-                    Image = _helper.GetStringValue(item, "market", "logo"),
+                    Id = DeserializerHelper.GetStringValue(item, "market", "identifier"),
+                    Name = DeserializerHelper.GetStringValue(item, "market", "name"),
+                    Price = DeserializerHelper.GetDecimalValue(item, "last"),
+                    TradeUrl = DeserializerHelper.GetStringValue(item, "trade_url"),
+                    Image = DeserializerHelper.GetStringValue(item, "market", "logo"),
                     CoinId = coinId
                 };
             }

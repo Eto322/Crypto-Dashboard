@@ -12,9 +12,9 @@ using OxyPlot.Axes;
 
 namespace UI.Inf
 {
-    public class ModelConvertor
+    public static class ModelConvertor
     {
-        public CryptoCurrencyModel BlltoUiCovnertor(CryptocurrencyModel cryptoCurrencyBll)
+        public static CryptoCurrencyModel BlltoUiCovnertor(CryptocurrencyModel cryptoCurrencyBll)
         {
             return new CryptoCurrencyModel
             {
@@ -40,7 +40,7 @@ namespace UI.Inf
             };
         }
 
-        public List<CryptoCurrencyModel> ConvertBllToUiCryptoCurrencies(List<CryptocurrencyModel> cryptoCurrencyBll)
+        public static List<CryptoCurrencyModel> ConvertBllToUiCryptoCurrencies(List<CryptocurrencyModel> cryptoCurrencyBll)
         {
             var cryptoCurrencyModel = new List<CryptoCurrencyModel>();
             foreach (var item in cryptoCurrencyBll)
@@ -51,7 +51,7 @@ namespace UI.Inf
             return cryptoCurrencyModel;
         }
 
-        public UI.Model.ExchangeModel BllToUiConverter(BLL.Model.ExchangeModel exchangeBll)
+        public static UI.Model.ExchangeModel BllToUiConverter(BLL.Model.ExchangeModel exchangeBll)
         {
             return new UI.Model.ExchangeModel
             {
@@ -64,7 +64,7 @@ namespace UI.Inf
             };
         }
 
-        public List<UI.Model.ExchangeModel> ConvertBllToUiExchanges(List<BLL.Model.ExchangeModel> exchangeBllList)
+        public static List<UI.Model.ExchangeModel> ConvertBllToUiExchanges(List<BLL.Model.ExchangeModel> exchangeBllList)
         {
             var exchangeModels = new List<UI.Model.ExchangeModel>();
             foreach (var item in exchangeBllList)
@@ -76,7 +76,7 @@ namespace UI.Inf
         }
 
 
-        public DetailedInfoModel CryptoConcurrenceToDetailedInfoModel(CryptoCurrencyModel cryptocurrency)
+        public static DetailedInfoModel CryptoConcurrenceToDetailedInfoModel(CryptoCurrencyModel cryptocurrency)
         {
             var AdditionalInfo = GetAdditionalCoinInfo(cryptocurrency.IdGecko);
             
@@ -99,7 +99,7 @@ namespace UI.Inf
             };
         }
 
-        public List<CandleStickItemModel> ConvertToCandleStickItems(List<CandlestickModel> models)
+        public static List<CandleStickItemModel> ConvertToCandleStickItems(List<CandlestickModel> models)
         {
             var items = new List<CandleStickItemModel>();
 
@@ -120,7 +120,7 @@ namespace UI.Inf
 
         #region Helpers
 
-        private AdditionalCoinInfoModel GetAdditionalCoinInfo (string id)
+        private static AdditionalCoinInfoModel GetAdditionalCoinInfo (string id)
         {
             var manager = new CryptoInfoManager(new CredentialManager());
             

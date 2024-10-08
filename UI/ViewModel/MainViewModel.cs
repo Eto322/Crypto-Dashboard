@@ -191,7 +191,7 @@ namespace UI.ViewModel
         #region Helpers
 
         private CryptoInfoManager _cryptoInfoManager;
-        private ModelConvertor _convertor;
+        
 
         #region SearchHelpers
 
@@ -204,7 +204,7 @@ namespace UI.ViewModel
                 return null;
             }
 
-            return _convertor.CryptoConcurrenceToDetailedInfoModel(currency);
+            return ModelConvertor.CryptoConcurrenceToDetailedInfoModel(currency);
         }
         
         public ObservableCollection<CryptoCurrencyModel> TopCoinsSearch()
@@ -222,13 +222,13 @@ namespace UI.ViewModel
         public ObservableCollection<CryptoCurrencyModel> TopCoinsSearchByTop()
         {
             return new ObservableCollection<CryptoCurrencyModel>(
-                _convertor.ConvertBllToUiCryptoCurrencies(_cryptoInfoManager.GetTopNCryptos(SelectedNumberOfTopCurrencies)));
+                ModelConvertor.ConvertBllToUiCryptoCurrencies(_cryptoInfoManager.GetTopNCryptos(SelectedNumberOfTopCurrencies)));
         }
 
         public ObservableCollection<CryptoCurrencyModel> SearchCoin()
         {
             return new ObservableCollection<CryptoCurrencyModel>(
-                _convertor.ConvertBllToUiCryptoCurrencies(_cryptoInfoManager.GetSearchCryptocurrencies(TopCoinsSearchBar)));
+                ModelConvertor.ConvertBllToUiCryptoCurrencies(_cryptoInfoManager.GetSearchCryptocurrencies(TopCoinsSearchBar)));
         }
 
         #endregion
@@ -351,7 +351,7 @@ namespace UI.ViewModel
                 
                 var bllExchanges = _cryptoInfoManager.GetExchangeModels(id);
                 return new ObservableCollection<ExchangeModel>(
-                    _convertor.ConvertBllToUiExchanges(bllExchanges));
+                    ModelConvertor.ConvertBllToUiExchanges(bllExchanges));
             });
 
             return exchangeModels;
@@ -373,7 +373,7 @@ namespace UI.ViewModel
             }
            
 
-            var candlestickItemModel = _convertor.ConvertToCandleStickItems(candlestickModels);
+            var candlestickItemModel = ModelConvertor.ConvertToCandleStickItems(candlestickModels);
             foreach (var item in candlestickItemModel)
             {
                 CandlestickItemsForDraw.Add(item);
@@ -464,11 +464,11 @@ namespace UI.ViewModel
             IsDarkTheme = true;
             SelectedNumberOfTopCurrencies = TopCurrenciesOptions[1];
             _cryptoInfoManager = new CryptoInfoManager(new CredentialManager());
-            _convertor = new ModelConvertor();
+            
 
             TopCurrencies = TopCoinsSearchByTop();
 
-            DetailedInfoModel = _convertor.CryptoConcurrenceToDetailedInfoModel(TopCurrencies[0]);
+            DetailedInfoModel = ModelConvertor.CryptoConcurrenceToDetailedInfoModel(TopCurrencies[0]);
             CandlestickItemsForDraw = new ObservableCollection<CandleStickItemModel>();
 
             LoadCandlestickData(TopCurrencies[0]);

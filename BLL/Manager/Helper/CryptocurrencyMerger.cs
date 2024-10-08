@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace BLL.Manager.Helper
 {
-    public class CryptocurrencyMerger
+    public static class CryptocurrencyMerger
     {
-        public List<CryptocurrencyModel> MergeCryptocurrencyData(List<CryptocurrencyModel> capData,
+        public static List<CryptocurrencyModel> MergeCryptocurrencyData(List<CryptocurrencyModel> capData,
             List<CryptocurrencyModel> geckoData)
         {
             var mergedData = new List<CryptocurrencyModel>();

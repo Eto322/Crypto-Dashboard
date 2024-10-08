@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace BLL.Deserializer.Helper
 {
-    public class DeserializerHelper
+    public static class DeserializerHelper
     {
-        public string GetStringValue(JToken item, string key)
+        public static string GetStringValue(JToken item, string key)
         {
             if (item[key] != null)
             {
@@ -19,7 +19,7 @@ namespace BLL.Deserializer.Helper
         }
 
         //Overloaded method for working with nested objects.
-        public string GetStringValue(JToken item, string parentKey, string childKey)
+        public static string GetStringValue(JToken item, string parentKey, string childKey)
         {
             if (item[parentKey] != null && item[parentKey][childKey] != null)
             {
@@ -28,7 +28,7 @@ namespace BLL.Deserializer.Helper
             return null;
         }
 
-        public decimal? GetDecimalValue(JToken item, string key)
+        public static decimal? GetDecimalValue(JToken item, string key)
         {
             var valueStr = item[key]?.ToString();
             if (string.IsNullOrEmpty(valueStr))
@@ -50,7 +50,7 @@ namespace BLL.Deserializer.Helper
             }
         }
         // Overloaded method for index-based extraction(CoinGecko candles)
-        public decimal? GetDecimalValue(JToken item, int index)
+        public static decimal? GetDecimalValue(JToken item, int index)
         {
             var valueStr = item?[index]?.ToString();
             if (string.IsNullOrEmpty(valueStr))
@@ -71,7 +71,7 @@ namespace BLL.Deserializer.Helper
                 return null;
             }
         }
-        public long? GetLongValue(JToken item, string key)
+        public static long? GetLongValue(JToken item, string key)
         {
             var valueStr = item?[key]?.ToString();
             if (string.IsNullOrEmpty(valueStr))
@@ -94,7 +94,7 @@ namespace BLL.Deserializer.Helper
         }
 
         // Overloaded GetLongValue for index-based extraction(CoinGecko candles)
-        public long? GetLongValue(JToken item, int index)
+        public static long? GetLongValue(JToken item, int index)
         {
             var valueStr = item?[index]?.ToString();
             if (string.IsNullOrEmpty(valueStr))

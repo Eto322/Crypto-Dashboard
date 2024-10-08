@@ -11,11 +11,11 @@ namespace BLL.Deserializer
 {
     public class CandlesDeserializer
     {
-        private DeserializerHelper _helper;
+       
 
         public List<CandlestickModel> Deserialize (string json)
         {
-            _helper = new DeserializerHelper();
+            
             if (string.IsNullOrEmpty(json))
             {
                 return new List<CandlestickModel>();
@@ -33,11 +33,11 @@ namespace BLL.Deserializer
             {
                 CandelStickData.Add(new CandlestickModel()
                 {
-                    Timestamp = _helper.GetLongValue(item, 0),  // Timestamp in milliseconds
-                    Open = _helper.GetDecimalValue(item, 1),    // Open price
-                    High = _helper.GetDecimalValue(item, 2),    // High price
-                    Low = _helper.GetDecimalValue(item, 3),     // Low price
-                    Close = _helper.GetDecimalValue(item, 4)    // Close price
+                    Timestamp = DeserializerHelper.GetLongValue(item, 0),  // Timestamp in milliseconds
+                    Open = DeserializerHelper.GetDecimalValue(item, 1),    // Open price
+                    High = DeserializerHelper.GetDecimalValue(item, 2),    // High price
+                    Low = DeserializerHelper.GetDecimalValue(item, 3),     // Low price
+                    Close = DeserializerHelper.GetDecimalValue(item, 4)    // Close price
                 });
             }
 

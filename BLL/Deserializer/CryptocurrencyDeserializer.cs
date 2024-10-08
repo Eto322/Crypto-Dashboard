@@ -13,10 +13,10 @@ namespace BLL.Deserializer
     
     public class CryptocurrencyDeserializer
     {
-        private DeserializerHelper _helper;
+       
         public List<CryptocurrencyModel> Deserialize(string json, bool isCoinCap)
         {
-            _helper=new DeserializerHelper();
+            
             if (string.IsNullOrEmpty(json))
             {
                 return new List<CryptocurrencyModel>();
@@ -44,17 +44,17 @@ namespace BLL.Deserializer
             {
                 cryptocurrencies.Add(new CryptocurrencyModel
                 { 
-                    IdCap = _helper.GetStringValue(item, "id"),
-                    Symbol = _helper.GetStringValue(item, "symbol").ToUpper(),
-                    Name = _helper.GetStringValue(item, "name"),
-                    CirculatingSupply = _helper.GetDecimalValue(item, "supply"),
-                    MaxSupply = _helper.GetDecimalValue(item, "maxSupply"),
-                    MarketCapUsd = _helper.GetDecimalValue(item, "marketCapUsd"),
-                    VolumeUsd24Hr = _helper.GetDecimalValue(item, "volumeUsd24Hr"),
-                    CurrentPrice = _helper.GetDecimalValue(item, "priceUsd"),
-                    ChangePercent24Hr = _helper.GetDecimalValue(item, "changePercent24Hr"),
-                    Explorer = _helper.GetStringValue(item, "explorer"),
-                    MarketCapRank =  _helper.GetDecimalValue(item,"rank")
+                    IdCap = DeserializerHelper.GetStringValue(item, "id"),
+                    Symbol = DeserializerHelper.GetStringValue(item, "symbol").ToUpper(),
+                    Name = DeserializerHelper.GetStringValue(item, "name"),
+                    CirculatingSupply = DeserializerHelper.GetDecimalValue(item, "supply"),
+                    MaxSupply = DeserializerHelper.GetDecimalValue(item, "maxSupply"),
+                    MarketCapUsd = DeserializerHelper.GetDecimalValue(item, "marketCapUsd"),
+                    VolumeUsd24Hr = DeserializerHelper.GetDecimalValue(item, "volumeUsd24Hr"),
+                    CurrentPrice = DeserializerHelper.GetDecimalValue(item, "priceUsd"),
+                    ChangePercent24Hr = DeserializerHelper.GetDecimalValue(item, "changePercent24Hr"),
+                    Explorer = DeserializerHelper.GetStringValue(item, "explorer"),
+                    MarketCapRank =  DeserializerHelper.GetDecimalValue(item,"rank")
 
                 });
             }
@@ -70,20 +70,20 @@ namespace BLL.Deserializer
             {
                 cryptocurrencies.Add(new CryptocurrencyModel
                 {
-                    IdGecko = _helper.GetStringValue(item, "id"),
-                    Symbol = _helper.GetStringValue(item, "symbol").ToUpper(),
-                    Name = _helper.GetStringValue(item, "name"),
-                    CirculatingSupply = _helper.GetDecimalValue(item, "circulating_supply"),
-                    TotalSupply = _helper.GetDecimalValue(item, "total_supply"),
-                    MaxSupply = _helper.GetDecimalValue(item, "max_supply"),
-                    MarketCap = _helper.GetDecimalValue(item, "market_cap"),
-                    TotalVolume = _helper.GetDecimalValue(item, "total_volume"),
-                    CurrentPrice = _helper.GetDecimalValue(item, "current_price"),
-                    PriceChange24H = _helper.GetDecimalValue(item, "price_change_24h"),
-                    PriceChangePercentage24H = _helper.GetDecimalValue(item, "price_change_percentage_24h"),
-                    MarketCapRank = _helper.GetDecimalValue(item, "market_cap_rank"),
-                    Image = _helper.GetStringValue(item, "image"),
-                    LastUpdated = _helper.GetStringValue(item, "last_updated")
+                    IdGecko = DeserializerHelper.GetStringValue(item, "id"),
+                    Symbol = DeserializerHelper.GetStringValue(item, "symbol").ToUpper(),
+                    Name = DeserializerHelper.GetStringValue(item, "name"),
+                    CirculatingSupply = DeserializerHelper.GetDecimalValue(item, "circulating_supply"),
+                    TotalSupply = DeserializerHelper.GetDecimalValue(item, "total_supply"),
+                    MaxSupply = DeserializerHelper.GetDecimalValue(item, "max_supply"),
+                    MarketCap = DeserializerHelper.GetDecimalValue(item, "market_cap"),
+                    TotalVolume = DeserializerHelper.GetDecimalValue(item, "total_volume"),
+                    CurrentPrice = DeserializerHelper.GetDecimalValue(item, "current_price"),
+                    PriceChange24H = DeserializerHelper.GetDecimalValue(item, "price_change_24h"),
+                    PriceChangePercentage24H = DeserializerHelper.GetDecimalValue(item, "price_change_percentage_24h"),
+                    MarketCapRank = DeserializerHelper.GetDecimalValue(item, "market_cap_rank"),
+                    Image = DeserializerHelper.GetStringValue(item, "image"),
+                    LastUpdated = DeserializerHelper.GetStringValue(item, "last_updated")
                 });
             }
 

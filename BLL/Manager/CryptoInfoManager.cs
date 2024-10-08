@@ -46,7 +46,7 @@ namespace BLL.Manager
             List<CryptocurrencyModel> geckoData = FetchTopFromGecko(n);
             List<CryptocurrencyModel> capData = FetchTopFromCap(n);
 
-            var topCryptos = new CryptocurrencyMerger().MergeCryptocurrencyData(capData, geckoData);
+            var topCryptos = CryptocurrencyMerger.MergeCryptocurrencyData(capData, geckoData);
 
 
             return topCryptos;
@@ -63,7 +63,7 @@ namespace BLL.Manager
             List<CryptocurrencyModel> geckoData = FetchSearchFromGecko(query);
             List<CryptocurrencyModel> capData = FetchSearchFromCap(query);
 
-            var searched = new CryptocurrencyMerger().MergeCryptocurrencyData(capData, geckoData);
+            var searched =  CryptocurrencyMerger.MergeCryptocurrencyData(capData, geckoData);
 
             return searched;
         }
