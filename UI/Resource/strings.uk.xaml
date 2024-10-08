@@ -30,4 +30,15 @@
     <System:String x:Key="Language:">Мова:</System:String>
     <System:String x:Key="NumberOfTopCurrencies :">Кількість топових валют:</System:String>
     <System:String x:Key="GoToMarket">Перейти на біржу</System:String>
+
+
+    <!-- DataGrid Localization -->
+    <TextBlock x:Key="dghSymbol" Text="{DynamicResource Symbol}" />
+    <TextBlock x:Key="dghName" Text="{DynamicResource Name}" />
+    <TextBlock x:Key="dghCurrentPrice" Text="{DynamicResource CurrentPrice}" />
+    <TextBlock x:Key="dghMarketCap" Text="{DynamicResource MarketCap}" />
+    <TextBlock x:Key="dgh24hVolume" Text="{DynamicResource 24hVolume}" />
+    <TextBlock x:Key="dghChange24h" Text="{DynamicResource Change(24h)}" />
+    <TextBlock x:Key="dghCirculatingSupply" Text="{DynamicResource CirculatingSupply}" />
+    <TextBlock x:Key="dghLastUpdated" Text="{DynamicResource LastUpdated}" />
 </ResourceDictionary>

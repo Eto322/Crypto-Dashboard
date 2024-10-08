@@ -41,14 +41,14 @@
                     </Grid>
                     <DataGrid AutoGenerateColumns="False" Margin="0" CanUserResizeColumns="True" ItemsSource="{Binding TopCurrencies}" IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="{DynamicResource Symbol}" Binding="{Binding Symbol}" />
-                            <DataGridTextColumn Header="{DynamicResource Name}" Binding="{Binding Name}" />
-                            <DataGridTextColumn Header="{DynamicResource CurrentPrice}" Binding="{Binding CurrentPrice, StringFormat={}{0:N2}}" />
-                            <DataGridTextColumn Header="{DynamicResource MarketCap}" Binding="{Binding MarketCap, StringFormat={}{0:N0}}" />
-                            <DataGridTextColumn Header="{DynamicResource 24hVolume}" Binding="{Binding TotalVolume, StringFormat={}{0:N0}}" />
-                            <DataGridTextColumn Header="{DynamicResource Change(24h)}" Binding="{Binding ChangePercent24Hr, StringFormat={}{0:N2}%}" />
-                            <DataGridTextColumn Header="{DynamicResource CirculatingSupply}" Binding="{Binding CirculatingSupply, StringFormat={}{0:N0}}" />
-                            <DataGridTextColumn Header="{DynamicResource LastUpdated}" Binding="{Binding LastUpdated, StringFormat={}{0:dd/MM/yyyy HH:mm}}" />
+                            <DataGridTextColumn Header="{DynamicResource dghSymbol}" Binding="{Binding Symbol}" />
+                            <DataGridTextColumn Header="{DynamicResource dghName}" Binding="{Binding Name}" />
+                            <DataGridTextColumn Header="{DynamicResource dghCurrentPrice}" Binding="{Binding CurrentPrice, StringFormat={}{0:N2}}" />
+                            <DataGridTextColumn Header="{DynamicResource dghMarketCap}" Binding="{Binding MarketCap, StringFormat={}{0:N0}}" />
+                            <DataGridTextColumn Header="{DynamicResource dgh24hVolume}" Binding="{Binding TotalVolume, StringFormat={}{0:N0}}" />
+                            <DataGridTextColumn Header="{DynamicResource dghChange24h}" Binding="{Binding ChangePercent24Hr, StringFormat={}{0:N2}%}" />
+                            <DataGridTextColumn Header="{DynamicResource dghCirculatingSupply}" Binding="{Binding CirculatingSupply, StringFormat={}{0:N0}}" />
+                            <DataGridTextColumn Header="{DynamicResource dghLastUpdated}" Binding="{Binding LastUpdated, StringFormat={}{0:dd/MM/yyyy HH:mm}}" />
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
